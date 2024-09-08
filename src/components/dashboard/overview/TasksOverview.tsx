@@ -1,11 +1,11 @@
 'use client'
+import Image from 'next/image'
 import {
   RectangleGroupIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-const percentage = 66;
 
 export function TasksOverview({ taskList, teamList }: any) {
   return (
@@ -47,7 +47,7 @@ export function TasksOverview({ taskList, teamList }: any) {
                   (obj: any) => obj.userID === user
                 );
                 return teamMember ? (
-                  <img
+                  <Image
                     key={user}
                     alt={teamMember.name}
                     src={teamMember.imageUrl}

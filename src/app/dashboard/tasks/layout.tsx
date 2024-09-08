@@ -1,16 +1,16 @@
 // app/dashboard/layout.tsx
 import { ReactNode } from "react";
-import Sidebar from "@/components/dashboard/navigation/Sidebar";
+import TasksBoard from "@/components/dashboard/tasks/TasksBoard";
 
-export default function DashboardLayout({
+export default function TaskLayout({
   children,
 }: {
   children: ReactNode;
 }) {
   return (
-      <Sidebar >
+      <TasksBoard>
         {children}
-      </Sidebar>
+      </TasksBoard>
     );
   }
   

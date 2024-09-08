@@ -3,13 +3,13 @@ import ActivityTable from "./ActivityTable";
 import { ProjectDropdown } from "./ProjectDropdown";
 import { Stats } from "./Stats";
 import { TasksOverview } from "./TasksOverview";
+import { Button } from "@/components/catalyst/button";
 import {
   secondaryNavigation,
   stats,
   teamList,
   activityItems,
-  statuses,
-  taskList
+  taskList,
 } from "@/lib/DEMODATA";
 
 function classNames(...classes: (string | false | undefined)[]) {
@@ -61,21 +61,27 @@ export default function Overview() {
               </ul>
             </nav>
             {/* Stats Section */}
-            <Stats stats={stats} classNames={classNames} teamList={teamList}/>
+            <Stats stats={stats} classNames={classNames} teamList={teamList} />
           </header>
 
           <div className=" border-gray-200 dark:border-white/10 pt-11">
-            <h2 className="px-4 text-lg font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
-              Current Tasks
-            </h2>
-            <TasksOverview taskList={taskList} teamList={teamList}/>
+            <div className="w-full flex flex-row items-center justify-between">
+              <h2 className="px-4 text-lg font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
+                Current Tasks
+              </h2>
+              <Button color="light" href='/dashboard/tasks' className="cursor-pointer">See All</Button>
+            </div>
+            <TasksOverview taskList={taskList} teamList={teamList} />
           </div>
 
           {/* Activity list */}
           <div className=" border-gray-200 dark:border-white/10 pt-11">
-            <h2 className="px-4 text-lg font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
-              Latest activity
-            </h2>
+            <div className="w-full flex flex-row items-center justify-between ">
+              <h2 className="px-4 text-lg font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
+                Latest activity
+              </h2>
+              <Button color="light" className="cursor-pointer">See All</Button>
+            </div>
             <ActivityTable
               activityItems={activityItems.slice(0, 8)}
               classNames={classNames}

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image'
 
 interface Stat {
   name: string;
@@ -57,12 +58,13 @@ export function Stats({ stats, classNames, teamList }: StatsProps) {
             <p className="text-sm font-medium leading-6 text-gray-700 dark:text-gray-400">
               {stat.name}
             </p>
-            <p className="mt-2 flex items-baseline gap-x-2">
+            <span className="mt-2 flex items-baseline gap-x-2">
               <span className="text-4xl font-semibold tracking-tight text-black dark:text-white">
                 {stat.name === "Team" ? (
                   <div className="flex flex-row pl-2">
                     {teamList.map((user) => (
-                      <img
+                      <Image
+                        key={user.imageUrl}
                         alt=""
                         src={user.imageUrl}
                         className="h-9 w-9 -ml-2 border-2 border-indigo-400 dark:border-green-400/20 rounded-full object-cover bg-gray-200 dark:bg-gray-800 "
@@ -73,7 +75,7 @@ export function Stats({ stats, classNames, teamList }: StatsProps) {
                   stat.value
                 )}
               </span>
-            </p>
+            </span>
           </div>
         ))}
       </div>

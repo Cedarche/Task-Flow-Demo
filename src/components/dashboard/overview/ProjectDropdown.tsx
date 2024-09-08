@@ -6,7 +6,6 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownSection,
-  DropdownLabel,
 } from "@/components/catalyst/dropdown";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { statuses, StatusKey } from "@/lib/DEMODATA";
@@ -31,14 +30,11 @@ export function ProjectDropdown() {
         <DropdownDivider />
         <DropdownSection>
           <DropdownHeading>Project Tasks</DropdownHeading>
-          <DropdownItem
-            href="#"
-            className="flex items-start justify-start border"
-          >
-            <ProgressIndicator status="Started" text="In Progress" />
+          <DropdownItem href="#">
+            <ProgressIndicator status="Started" text="Started" />
           </DropdownItem>
           <DropdownItem href="#">
-            <ProgressIndicator status="Completed" text="In Progress" />
+            <ProgressIndicator status="Completed" text="Completed" />
           </DropdownItem>
           <DropdownItem href="#">
             <ProgressIndicator status="Error" text="Issues" />
@@ -49,7 +45,12 @@ export function ProjectDropdown() {
   );
 }
 
-const ProgressIndicator = ({ status, text }: any) => {
+interface ProgressProps {
+  status: StatusKey;
+  text: string;
+}
+
+const ProgressIndicator = ({ status, text }: ProgressProps) => {
   return (
     <div className="flex flex-row items-center">
       <div

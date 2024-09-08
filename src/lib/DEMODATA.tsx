@@ -1,7 +1,6 @@
 export const secondaryNavigation = [
   { name: "Overview", href: "#", current: true },
   { name: "Activity", href: "#", current: false },
-  { name: "Collaborators", href: "#", current: false },
   { name: "Reports", href: "#", current: false },
 ];
 

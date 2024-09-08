@@ -64,7 +64,7 @@ export default function LayoutSidebar({ children }: any) {
             </NavbarItem>
             <Dropdown>
               <DropdownButton as={NavbarItem}>
-                <Avatar src="/profile-photo.jpg" square />
+                <Avatar src="/Headshot.jpg" square />
               </DropdownButton>
               <DropdownMenu className="min-w-64" anchor="bottom end">
                 <DropdownItem href="/my-profile">
@@ -195,17 +195,17 @@ export default function LayoutSidebar({ children }: any) {
               <DropdownButton as={SidebarItem}>
                 <span className="flex min-w-0 items-center gap-3">
                   <Avatar
-                    src="/profile-photo.jpg"
-                    className="size-10"
+                    src="/Headshot.jpg"
+                    className="size-10 object-contain"
                     square
                     alt=""
                   />
                   <span className="min-w-0">
                     <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                      Erica
+                      Tom
                     </span>
                     <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                      erica@example.com
+                      tomcarruthers96@gmail.com
                     </span>
                   </span>
                 </span>
