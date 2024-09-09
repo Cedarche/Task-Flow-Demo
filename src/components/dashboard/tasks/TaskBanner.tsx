@@ -1,11 +1,12 @@
+'use client'
 import {
   PlusIcon,
   AdjustmentsHorizontalIcon,
   Squares2X2Icon,
   ShareIcon,
 } from "@heroicons/react/16/solid";
-import { Field, Label } from "@/components/catalyst/fieldset";
-
+import { Field } from "@/components/catalyst/fieldset";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Listbox,
   ListboxLabel,
@@ -13,9 +14,9 @@ import {
 } from "@/components/catalyst/listbox";
 import { Button } from "@/components/catalyst/button";
 
-export function TaskBanner({ addTask, setAddTask }: any) {
+export function TaskBanner() {
   return (
-    <div className="flex rounded-lg flex-col items-start justify-between gap-x-8 gap-y-4 bg-gray-100/60 dark:bg-gray-700/10 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8 border border-zinc-300 dark:border-white/10 mt-3">
+    <div className="flex rounded-lg items-start justify-between   bg-gray-100/60 dark:bg-gray-700/10 p-2 2xl:p-4 sm:flex-row sm:items-center sm:px-6 lg:px-8 border border-zinc-300 dark:border-white/10 mt-3">
       <div>
         <div className="flex items-center gap-x-3">
           <div className="flex-none rounded-full text-green-400 bg-green-400/30 p-1 dark:bg-green-400/10 dark:text-green-400">
@@ -33,18 +34,18 @@ export function TaskBanner({ addTask, setAddTask }: any) {
       <div className="flex flex-row gap-x-3 items-center">
         <Button color="light">
           <AdjustmentsHorizontalIcon />
-          Filter
+          <span className="hidden sm:block">Filter</span>
         </Button>
         <ViewDropdown />
         <Button
           color="light"
           className="cursor-pointer"
-          onClick={() => setAddTask(true)}
+
         >
           <PlusIcon />
-          Add Task
+          <span className="hidden sm:block">Add Stage</span>
         </Button>
-        <div className="order-first flex-none rounded-full bg-green-100 text-green-600 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-green-200 dark:bg-green-400/10 dark:text-green-400 dark:ring-green-400/30 sm:order-none">
+        <div className="hidden sm:block order-first flex-none rounded-full bg-green-100 text-green-600 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-green-200 dark:bg-green-400/10 dark:text-green-400 dark:ring-green-400/30 sm:order-none">
           On schedule
         </div>
       </div>
@@ -75,16 +76,29 @@ function StageDropdown() {
 }
 
 function ViewDropdown() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const projectID = pathname.split("/")[1];
+
+  // Handler to handle change in the dropdown value
+  const handleViewChange = (value: string) => {
+    if (value === "Grid") {
+      router.push(`/${projectID}/dashboard/tasks`);
+    } else if (value === "Tree") {
+      router.push(`/${projectID}/dashboard/tasks/tree`);
+    }
+  };
+
   return (
     <Field>
-      <Listbox name="Grid" defaultValue="Grid">
+      <Listbox name="Grid" defaultValue="Grid" onChange={handleViewChange}>
         <ListboxOption value="Grid">
           <Squares2X2Icon />
-          <ListboxLabel>Grid</ListboxLabel>
+          <ListboxLabel className="hidden sm:block">Grid</ListboxLabel>
         </ListboxOption>
         <ListboxOption value="Tree">
           <ShareIcon />
-          <ListboxLabel>Tree</ListboxLabel>
+          <ListboxLabel className="hidden sm:block">Tree</ListboxLabel>
         </ListboxOption>
       </Listbox>
     </Field>

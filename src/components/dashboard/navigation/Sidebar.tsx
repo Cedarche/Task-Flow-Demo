@@ -1,5 +1,7 @@
-
+"use client";
+import { usePathname } from "next/navigation";
 import { Avatar } from "@/components/catalyst/avatar";
+
 import {
   Dropdown,
   DropdownButton,
@@ -35,6 +37,7 @@ import {
   PlusIcon,
   ShieldCheckIcon,
   UserIcon,
+  RectangleGroupIcon,
 } from "@heroicons/react/16/solid";
 import {
   Cog6ToothIcon,
@@ -44,12 +47,14 @@ import {
   QuestionMarkCircleIcon,
   SparklesIcon,
   Square2StackIcon,
-ChatBubbleLeftRightIcon,
-  UserGroupIcon
+  ChatBubbleLeftRightIcon,
+  UserGroupIcon,
 } from "@heroicons/react/20/solid";
 import ThemeToggle from "../../themeToggle";
 
 export default function LayoutSidebar({ children }: any) {
+  const pathname = usePathname();
+  const projectID = pathname.split("/")[1];
   return (
     <SidebarLayout
       navbar={
@@ -101,8 +106,8 @@ export default function LayoutSidebar({ children }: any) {
               <DropdownButton as={SidebarItem} className="lg:mb-2.5">
                 <Avatar
                   slot="icon"
-                  initials="ED"
-                  className="bg-purple-500 text-white"
+                  initials="SP"
+                  className="bg-blue-500 text-white"
                 />
                 <SidebarLabel>Snap Park</SidebarLabel>
                 <ChevronDownIcon />
@@ -114,18 +119,18 @@ export default function LayoutSidebar({ children }: any) {
                 <DropdownItem href="/teams/1">
                   <Avatar
                     slot="icon"
-                    initials="TL"
-                    className="bg-purple-500 text-white"
+                    initials="CC"
+                    className="bg-blue-500 text-white"
                   />
-                  <DropdownLabel>Tailwind Labs</DropdownLabel>
+                  <DropdownLabel>Cross Copy</DropdownLabel>
                 </DropdownItem>
                 <DropdownItem href="/teams/2">
                   <Avatar
                     slot="icon"
-                    initials="WC"
-                    className="bg-purple-500 text-white"
+                    initials="R"
+                    className="bg-blue-500 text-white"
                   />
-                  <DropdownLabel>Workcation</DropdownLabel>
+                  <DropdownLabel>Ream</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem href="/teams/create">
@@ -147,35 +152,49 @@ export default function LayoutSidebar({ children }: any) {
           </SidebarHeader>
           <SidebarBody>
             <SidebarSection>
-              <SidebarItem href="/dashboard">
+              <SidebarItem href={`/${projectID}/dashboard`}>
                 <HomeIcon />
                 <SidebarLabel>Overview</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/dashboard/tasks">
+              <SidebarItem href={`/${projectID}/dashboard/tasks`}>
                 <Square2StackIcon />
                 <SidebarLabel>Tasks</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/dashboard/team">
+              <SidebarItem href={`/${projectID}/dashboard/team`}>
                 <UserGroupIcon />
                 <SidebarLabel>Team</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/dashboard/settings">
+              <SidebarItem href={`/${projectID}/dashboard/settings`}>
                 <Cog6ToothIcon />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/dashboard/discussion">
+              <SidebarItem href={`/${projectID}/dashboard/discussion`}>
                 <ChatBubbleLeftRightIcon />
                 <SidebarLabel>Discussion</SidebarLabel>
               </SidebarItem>
             </SidebarSection>
-            <SidebarSection className="max-lg:hidden">
-              <SidebarHeading>Latest Changes</SidebarHeading>
+            <SidebarSection className="max-2xl:hidden">
+              <SidebarHeading>Latest Task Changes</SidebarHeading>
               <SidebarItem href="/events/1">
-                Bear Hug: Live in Concert
+                <RectangleGroupIcon className="h-6 w-6  text-blue-400" />
+                <span className="font-mono text-sm leading-1">0035</span>{" "}
+                Started
               </SidebarItem>
-              <SidebarItem href="/events/2">Viking People</SidebarItem>
-              <SidebarItem href="/events/3">Six Fingers — DJ Set</SidebarItem>
-              <SidebarItem href="/events/4">We All Look The Same</SidebarItem>
+              <SidebarItem href="/events/1">
+                <RectangleGroupIcon className="h-6 w-6  text-blue-400" />
+                <span className="font-mono text-sm leading-1">0034</span>{" "}
+                Started
+              </SidebarItem>
+              <SidebarItem href="/events/1">
+                <RectangleGroupIcon className="h-6 w-6  text-blue-400" />
+                <span className="font-mono text-sm leading-1">0033</span>{" "}
+                Started
+              </SidebarItem>
+              <SidebarItem href="/events/1">
+                <RectangleGroupIcon className="h-6 w-6 text-blue-400" />
+                <span className="font-mono text-sm leading-1">0032</span>{" "}
+                Completed
+              </SidebarItem>
             </SidebarSection>
             <SidebarSpacer />
             <SidebarSection>

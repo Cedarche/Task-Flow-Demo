@@ -1,16 +1,3 @@
-export const secondaryNavigation = [
-  { name: "Overview", href: "#", current: true },
-  { name: "Activity", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
-];
-
-export const stats = [
-  { name: "Team", value: "405" },
-  { name: "Completed Tasks", value: "32" },
-  { name: "Remaining Tasks", value: "18" },
-  { name: "Progress", value: "56.25%" },
-];
-
 export type StatusKey = "Completed" | "Error" | "Started";
 
 export const statuses: Record<StatusKey, string> = {
@@ -18,6 +5,13 @@ export const statuses: Record<StatusKey, string> = {
   Completed: "text-green-400 bg-green-400/10",
   Error: "text-rose-400 bg-rose-400/10",
 };
+
+export const stats = [
+  { name: "Team", value: "405" },
+  { name: "Completed Tasks", value: "32" },
+  { name: "Remaining Tasks", value: "18" },
+  { name: "Progress", value: "56.25%" },
+];
 
 export const activityItems = [
   {
@@ -155,6 +149,7 @@ export const teamList = [
     userID: "456489451239",
     task: "0032",
     subTask: "23",
+    completedTasks: [""],
     imageUrl:
       "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
@@ -195,8 +190,10 @@ export const teamList = [
 export const taskList = [
   {
     taskID: "0033",
+    stage: "4",
     startDate: "7/09/2024 - 5:56 pm",
     completionDate: null,
+    started: true,
     completed: false,
     percentComplete: 66,
     taskName: "Update login screen",
@@ -207,7 +204,9 @@ export const taskList = [
       {
         subTaskID: "01",
         startDate: "7/09/2024 - 5:56 pm",
+        started: true,
         completionDate: null,
+        completed: false,
         subTaskName: "Refactor login button",
         subTaskDescription: "",
       },
@@ -215,9 +214,11 @@ export const taskList = [
   },
   {
     taskID: "0034",
-    startDate: "8/09/2024 - 9:00 am",
-    completionDate: null,
+    stage: "4",
+    started: true,
+    startDate: "8/09/2024 - 9:00 am", // now()
     completed: false,
+    completionDate: null,
     percentComplete: 16,
     taskName: "Refactor register screen",
     taskDescription:
@@ -227,7 +228,9 @@ export const taskList = [
       {
         subTaskID: "01",
         startDate: "8/09/2024 - 9:00 am",
+        started: true,
         completionDate: null,
+        completed: false,
         subTaskName: "Update form validation",
         subTaskDescription:
           "Ensure form validation aligns with new guidelines.",
@@ -235,7 +238,9 @@ export const taskList = [
       {
         subTaskID: "02",
         startDate: "8/09/2024 - 9:30 am",
+        started: true,
         completionDate: null,
+        completed: false,
         subTaskName: "Improve UI elements",
         subTaskDescription:
           "Enhance the design and layout of input fields and buttons.",
@@ -244,6 +249,8 @@ export const taskList = [
   },
   {
     taskID: "0035",
+    stage: "4",
+    started: true,
     startDate: "8/09/2024 - 11:00 am",
     completionDate: null,
     completed: false,
@@ -256,7 +263,9 @@ export const taskList = [
       {
         subTaskID: "01",
         startDate: "8/09/2024 - 11:00 am",
+        started: true,
         completionDate: null,
+        completed: false,
         subTaskName: "Refactor login function",
         subTaskDescription:
           "Update login function to handle new authentication methods.",
@@ -264,7 +273,9 @@ export const taskList = [
       {
         subTaskID: "02",
         startDate: "8/09/2024 - 11:30 am",
+        started: true,
         completionDate: null,
+        completed: false,
         subTaskName: "Enhance security checks",
         subTaskDescription:
           "Add additional security checks to ensure data protection.",
@@ -273,6 +284,8 @@ export const taskList = [
   },
   {
     taskID: "0036",
+    stage: "4",
+    started: true,
     startDate: "9/09/2024 - 2:00 pm",
     completionDate: null,
     completed: false,
@@ -285,23 +298,254 @@ export const taskList = [
       {
         subTaskID: "01",
         startDate: "9/09/2024 - 2:00 pm",
+        started: true,
         completionDate: null,
+        completed: false,
         subTaskName: "Design profile settings page",
         subTaskDescription:
           "Create mockups and design the layout for the profile settings page.",
       },
       {
         subTaskID: "02",
+        started: true,
         startDate: "9/09/2024 - 2:30 pm",
         completionDate: null,
+        completed: false,
         subTaskName: "Implement update functionality",
         subTaskDescription:
           "Develop the functionality to update user profile information.",
       },
       {
         subTaskID: "03",
-        startDate: "9/09/2024 - 3:00 pm",
+        started: true,
+        startDate: "9/09/2024 - 2:00 pm",
         completionDate: null,
+        completed: false,
+        subTaskName: "Test user profile settings",
+        subTaskDescription:
+          "Conduct thorough testing to ensure all features work correctly.",
+      },
+    ],
+  },
+  {
+    taskID: "0030",
+    stage: "3",
+    started: true,
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 5,
+    taskName: "Stage 3",
+    taskDescription:
+      "Create a user profile settings page that allows users to update their personal information and preferences.",
+    assignedUsers: ["567890123456", "678901234567"],
+    subTasks: [
+      {
+        subTaskID: "01",
+        startDate: "9/09/2024 - 2:00 pm",
+        started: true,
+        completionDate: null,
+        completed: false,
+        subTaskName: "Design profile settings page",
+        subTaskDescription:
+          "Create mockups and design the layout for the profile settings page.",
+      },
+      {
+        subTaskID: "02",
+        started: true,
+        startDate: "9/09/2024 - 2:30 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Implement update functionality",
+        subTaskDescription:
+          "Develop the functionality to update user profile information.",
+      },
+      {
+        subTaskID: "03",
+        started: true,
+        startDate: "9/09/2024 - 2:00 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Test user profile settings",
+        subTaskDescription:
+          "Conduct thorough testing to ensure all features work correctly.",
+      },
+    ],
+  },
+  {
+    taskID: "0031",
+    stage: "3",
+    started: true,
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 5,
+    taskName: "Stage 3 - 2",
+    taskDescription:
+      "Create a user profile settings page that allows users to update their personal information and preferences.",
+    assignedUsers: ["567890123456", "678901234567"],
+    subTasks: [
+      {
+        subTaskID: "01",
+        startDate: "9/09/2024 - 2:00 pm",
+        started: true,
+        completionDate: null,
+        completed: false,
+        subTaskName: "Design profile settings page",
+        subTaskDescription:
+          "Create mockups and design the layout for the profile settings page.",
+      },
+      {
+        subTaskID: "02",
+        started: true,
+        startDate: "9/09/2024 - 2:30 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Implement update functionality",
+        subTaskDescription:
+          "Develop the functionality to update user profile information.",
+      },
+      {
+        subTaskID: "03",
+        started: true,
+        startDate: "9/09/2024 - 2:00 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Test user profile settings",
+        subTaskDescription:
+          "Conduct thorough testing to ensure all features work correctly.",
+      },
+    ],
+  },
+  {
+    taskID: "0020",
+    stage: "2",
+    started: true,
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 5,
+    taskName: "Stage 2",
+    taskDescription:
+      "Create a user profile settings page that allows users to update their personal information and preferences.",
+    assignedUsers: ["567890123456", "678901234567"],
+    subTasks: [
+      {
+        subTaskID: "01",
+        startDate: "9/09/2024 - 2:00 pm",
+        started: true,
+        completionDate: null,
+        completed: false,
+        subTaskName: "Design profile settings page",
+        subTaskDescription:
+          "Create mockups and design the layout for the profile settings page.",
+      },
+      {
+        subTaskID: "02",
+        started: true,
+        startDate: "9/09/2024 - 2:30 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Implement update functionality",
+        subTaskDescription:
+          "Develop the functionality to update user profile information.",
+      },
+      {
+        subTaskID: "03",
+        started: true,
+        startDate: "9/09/2024 - 2:00 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Test user profile settings",
+        subTaskDescription:
+          "Conduct thorough testing to ensure all features work correctly.",
+      },
+    ],
+  },
+  {
+    taskID: "0020",
+    stage: "1",
+    started: true,
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 5,
+    taskName: "Stage 1",
+    taskDescription:
+      "Create a user profile settings page that allows users to update their personal information and preferences.",
+    assignedUsers: ["567890123456", "678901234567"],
+    subTasks: [
+      {
+        subTaskID: "01",
+        startDate: "9/09/2024 - 2:00 pm",
+        started: true,
+        completionDate: null,
+        completed: true,
+        subTaskName: "Design profile settings page",
+        subTaskDescription:
+          "Create mockups and design the layout for the profile settings page.",
+      },
+      {
+        subTaskID: "02",
+        started: true,
+        startDate: "9/09/2024 - 2:30 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Implement update functionality",
+        subTaskDescription:
+          "Develop the functionality to update user profile information.",
+      },
+      {
+        subTaskID: "03",
+        started: false,
+        startDate: "9/09/2024 - 2:00 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Test user profile settings",
+        subTaskDescription:
+          "Conduct thorough testing to ensure all features work correctly.",
+      },
+    ],
+  },
+  {
+    taskID: "0010",
+    stage: "1",
+    started: true,
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 5,
+    taskName: "Stage 1",
+    taskDescription:
+      "Create a user profile settings page that allows users to update their personal information and preferences.",
+    assignedUsers: ["567890123456", "678901234567"],
+    subTasks: [
+      {
+        subTaskID: "01",
+        startDate: "9/09/2024 - 2:00 pm",
+        started: true,
+        completionDate: null,
+        completed: true,
+        subTaskName: "Design profile settings page",
+        subTaskDescription:
+          "Create mockups and design the layout for the profile settings page.",
+      },
+      {
+        subTaskID: "02",
+        started: true,
+        startDate: "9/09/2024 - 2:30 pm",
+        completionDate: null,
+        completed: false,
+        subTaskName: "Implement update functionality",
+        subTaskDescription:
+          "Develop the functionality to update user profile information.",
+      },
+      {
+        subTaskID: "03",
+        started: false,
+        startDate: "9/09/2024 - 2:00 pm",
+        completionDate: null,
+        completed: false,
         subTaskName: "Test user profile settings",
         subTaskDescription:
           "Conduct thorough testing to ensure all features work correctly.",
@@ -309,3 +553,72 @@ export const taskList = [
     ],
   },
 ];
+
+interface User {
+  uid: string;
+  createdAt: Date;
+  lastUpdated: Date;
+  projects: Project[];
+}
+
+interface Project {
+  projectID: string;
+  createdAt: Date;
+  lastUpdated: Date;
+  team: TeamMember[];
+  activity: ActivityItem[];
+  tasks: Task[];
+  stats: Stats[];
+}
+
+interface TeamMember {
+  name: string;
+  userID: string;
+  task: string;
+  subTask: string;
+  completedTasks?: string[];
+  imageUrl: string;
+}
+
+interface Stats {
+  name: string;
+  value: string;
+}
+
+interface ActivityItem {
+  user: {
+    name: string;
+    imageUrl: string;
+  };
+  message: string;
+  task: string;
+  subTask: string;
+  status: string;
+  duration: string;
+  date: string;
+  dateTime: string;
+}
+
+interface Task {
+  taskID: string;
+  stage: string;
+  startDate: string;
+  completionDate?: string | null;
+  started: boolean;
+  completed: boolean;
+  percentComplete: number;
+  taskName: string;
+  taskDescription: string;
+  assignedUsers: string[];
+  subTasks: SubTask[];
+}
+
+interface SubTask {
+  subTaskID: string;
+  startDate: string;
+  started: boolean;
+  completionDate?: string | null;
+  completed: boolean;
+  subTaskName: string;
+  subTaskDescription?: string;
+}

@@ -5,12 +5,17 @@ import { Stats } from "./Stats";
 import { TasksOverview } from "./TasksOverview";
 import { Button } from "@/components/catalyst/button";
 import {
-  secondaryNavigation,
   stats,
   teamList,
   activityItems,
   taskList,
 } from "@/lib/DEMODATA";
+
+const secondaryNavigation = [
+  { name: "Overview", href: "#", current: true },
+  { name: "Activity", href: "#", current: false },
+  { name: "Reports", href: "#", current: false },
+];
 
 function classNames(...classes: (string | false | undefined)[]) {
   return classes.filter(Boolean).join(" ");
@@ -23,7 +28,7 @@ export default function Overview() {
         <div className="flex w-full flex-wrap items-end justify-between gap-4 border-b border-zinc-300 pb-6 dark:border-white/10">
           <Heading
             level={1}
-            className="xl:text-4xl  md:ml-8 text-black dark:text-white"
+            className="xl:text-2xl  md:ml-8 text-black dark:text-white"
           >
             Snap Park
           </Heading>
@@ -66,7 +71,7 @@ export default function Overview() {
 
           <div className=" border-gray-200 dark:border-white/10 pt-11">
             <div className="w-full flex flex-row items-center justify-between">
-              <h2 className="px-4 text-lg font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
+              <h2 className="px-4  font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
                 Current Tasks
               </h2>
               <Button color="light" href='/dashboard/tasks' className="cursor-pointer">See All</Button>
@@ -77,7 +82,7 @@ export default function Overview() {
           {/* Activity list */}
           <div className=" border-gray-200 dark:border-white/10 pt-11">
             <div className="w-full flex flex-row items-center justify-between ">
-              <h2 className="px-4 text-lg font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
+              <h2 className="px-4 font-bold leading-7 text-black dark:text-white sm:px-6 lg:px-8">
                 Latest activity
               </h2>
               <Button color="light" className="cursor-pointer">See All</Button>

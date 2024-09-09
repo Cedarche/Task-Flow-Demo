@@ -63,7 +63,7 @@ export function Stats({ stats, classNames, teamList }: StatsProps) {
                 {stat.name === "Team" ? (
                   <div className="flex flex-row pl-2">
                     {teamList.map((user) => (
-                      <Image
+                      <img
                         key={user.imageUrl}
                         alt=""
                         src={user.imageUrl}

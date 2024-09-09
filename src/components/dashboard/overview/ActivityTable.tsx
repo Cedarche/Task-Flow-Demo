@@ -1,7 +1,5 @@
 import React from "react";
 import { statuses, StatusKey } from "@/lib/DEMODATA";
-import Image from 'next/image'
-
 
 function ActivityTable({ activityItems, classNames }: any) {
   return (
@@ -52,7 +50,7 @@ function ActivityTable({ activityItems, classNames }: any) {
           <tr key={item.commit}>
             <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
               <div className="flex items-center gap-x-4">
-                <Image
+                <img
                   alt=""
                   src={item.user.imageUrl}
                   className="h-8 w-8 rounded-full object-cover bg-gray-200 dark:bg-gray-800 "

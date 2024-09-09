@@ -17,12 +17,21 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  /* zoom: 0.92 */
   /* font-family: 'Inter var',  Helvetica, sans-serif; */
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
 

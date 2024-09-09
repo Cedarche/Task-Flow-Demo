@@ -1,8 +1,8 @@
 'use client'
-import Image from 'next/image'
 import {
   RectangleGroupIcon,
   ArrowTopRightOnSquareIcon,
+  RectangleStackIcon
 } from "@heroicons/react/24/outline";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -17,7 +17,7 @@ export function TasksOverview({ taskList, teamList }: any) {
         >
           <div className="flex items-start mb-2 w-full justify-between">
             <div className="flex flex-row">
-              <RectangleGroupIcon className="h-6 w-6 mr-2 text-indigo-400" />
+              <RectangleStackIcon className="h-6 w-6 mr-2 text-indigo-400" />
               <div className="font-mono text-sm leading-6 text-gray-500 dark:text-gray-400">
                 {task.taskID}
               </div>
@@ -47,7 +47,7 @@ export function TasksOverview({ taskList, teamList }: any) {
                   (obj: any) => obj.userID === user
                 );
                 return teamMember ? (
-                  <Image
+                  <img
                     key={user}
                     alt={teamMember.name}
                     src={teamMember.imageUrl}
