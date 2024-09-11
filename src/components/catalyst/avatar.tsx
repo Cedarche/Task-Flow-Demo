@@ -46,7 +46,7 @@ export function Avatar({
           </text>
         </svg>
       )}
-      {src && <img className="size-full object-cover" src={src} alt={alt} />}
+      {src && <img className="size-full object-cover overflow-hidden" src={src} alt={alt} />}
     </span>
   )
 }

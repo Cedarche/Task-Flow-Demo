@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { TaskStoreProvider } from "@/providers/task-store-provider";
+import { TeamStoreProvider } from "@/providers/team-store-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,11 +30,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased no-scrollbar `}
       >
-        <ThemeProvider attribute="class" >
-          {children}
-        </ThemeProvider>
+        <TeamStoreProvider>
+          <TaskStoreProvider>
+            <ThemeProvider attribute="class">{children}</ThemeProvider>
+          </TaskStoreProvider>
+        </TeamStoreProvider>
       </body>
     </html>
   );

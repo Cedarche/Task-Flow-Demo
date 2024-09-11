@@ -18,18 +18,26 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { getItemStyle } from "./GridFunctions"; // Assuming you have a helper function for styles
 import { CircularProgressbar } from "react-circular-progressbar";
 import { teamList } from "@/lib/DEMODATA";
+import { Task } from "@/stores/task-store";
 import SubTask from "./SubTask";
 
 interface DraggableItemProps {
-  task: any;
+  task: Task;
   index: number;
   state: any[];
   setState: React.Dispatch<React.SetStateAction<any[]>>;
   ind: number;
 }
+
+const statusColors: Record<Task["status"], string> = {
+  notStarted: "bg-gray-50 text-gray-600 ring-gray-500/10 dark:text-gray-400 dark:ring-gray-400/20 dark:bg-gray-400/10",
+  started: "bg-blue-50 text-blue-700 ring-blue-700/10 dark:text-blue-400 dark:ring-blue-400/30 dark:bg-blue-400/10",
+  issues: "bg-red-50 text-red-700 ring-red-600/10 dark:text-red-400 dark:ring-red-400/20 dark:bg-red-400/10",
+  complete: "bg-green-50 text-green-700 ring-green-600/20 dark:text-green-400 dark:ring-green-500/20 dark:bg-green-500/10",
+};
+
 
 const DraggableItem: React.FC<DraggableItemProps> = ({
   task,
@@ -38,6 +46,8 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   setState,
   ind,
 }) => {
+  const statusClass = statusColors[task.status as keyof typeof statusColors];
+
   return (
     <Draggable key={task.taskID} draggableId={task.taskID} index={index}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
@@ -45,22 +55,20 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          //   style={getItemStyle(
-          //     snapshot.isDragging,
-          //     provided.draggableProps.style
-          //   )}
-          className="overflow-hidden flex flex-col rounded-lg bg-zinc-100 mb-4 dark:bg-zinc-800  shadow "
+          className="overflow-hidden flex flex-col rounded-lg bg-zinc-100 mb-2 2xl:mb-4 dark:bg-zinc-800  shadow hover:ring-1 hover:ring-green-400/70"
         >
-          <div className="px-4 py-5 sm:p-5">
+          <div className="p-3 2xl:p-5">
             <div className="flex items-start mb-2 w-full justify-between">
-              <div className="flex flex-row">
-                <RectangleStackIcon className="h-6 w-6 mr-2 text-indigo-400" />
-                <div className="font-mono text-sm leading-6 text-gray-500 dark:text-gray-400">
+              <div
+                className={`inline-flex items-center rounded-md px-1.5 py-0.5 2xl:px-2 2xl:py-1 text-xs font-medium ring-1 ring-inset ${statusClass}`}
+              >
+                <RectangleStackIcon className="size-4 2xl:size-6 mr-2 " />
+                <div className="font-mono text-xs 2xl:text-sm leading-6 text-gray-500 dark:text-gray-400 ">
                   {task.taskID}
                 </div>
               </div>
               <XMarkIcon
-                className="h-6 w-6 cursor-pointer text-gray-600 dark:text-gray-400"
+                className="size-4 2xl:size-6  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400"
                 onClick={() => {
                   const newState = [...state];
                   newState[ind].splice(index, 1);
@@ -70,10 +78,10 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
             </div>
             <div className="flex flex-row">
               <div className="flex-grow flex flex-col">
-                <dt className="truncate text-base font-bold text-gray-700 dark:text-gray-200">
+                <dt className="truncate text-sm 2xl:text-base font-bold text-gray-700 dark:text-gray-200">
                   {task.taskName}
                 </dt>
-                <dt className="mt-2 truncate text-sm text-wrap text-gray-600 dark:text-gray-400">
+                <dt className="mt-2 truncate text-xs 2xl:text-sm text-wrap text-gray-600 dark:text-gray-400">
                   {task.taskDescription}
                 </dt>
               </div>
@@ -88,7 +96,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
               </div>
             </div>
             <div className="flex w-full items-center justify-between">
-              <div className="flex flex-row pl-2 mt-2 min-w-[40px]">
+              <div className="flex flex-row pl-2 mt-3 min-w-[40px]">
                 {task.assignedUsers.map((user: string) => {
                   const teamMember = teamList.find(
                     (obj: any) => obj.userID === user
@@ -98,12 +106,12 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
                       key={user}
                       alt={teamMember.name}
                       src={teamMember.imageUrl}
-                      className="h-7 w-7 -ml-2 border-2 border-indigo-400 dark:border-green-400/20 rounded-full object-cover bg-gray-200 dark:bg-gray-800"
+                      className="size-5 2xl:size-7 -ml-2 border-2 border-indigo-400 dark:border-green-400/20 rounded-full object-cover bg-gray-200 dark:bg-gray-800"
                     />
                   ) : null;
                 })}
               </div>
-              <dt className="mt-2 truncate text-sm text-wrap text-gray-600 dark:text-gray-400">
+              <dt className="mt-2 truncate text-xs 2xl:text-sm text-wrap text-gray-600 dark:text-gray-400">
                 {task.startDate}
               </dt>
             </div>
@@ -113,26 +121,25 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
             className="w-full flex flex-col cursor-pointer p-1.5 border-t  bg-zinc-200/50 dark:bg-zinc-700/50"
           >
             <DisclosureButton className="w-full flex items-center justify-between">
-              <div className="text-sm text-gray-500 ml-1.5 my-1 dark:text-gray-400">
+              <div className="text-xs 2xl:text-sm text-gray-500 ml-1.5 my-1 dark:text-gray-400">
                 Sub tasks
               </div>
 
-              <ChevronDoubleDownIcon className="h-4 w-4 mr-1.5 my-1 text-gray-500 dark:text-gray-400" />
+              <ChevronDoubleDownIcon className="size-3 2xl:size-4 mr-1.5 my-1 text-gray-500 dark:text-gray-400" />
             </DisclosureButton>
             <div className="overflow-hidden ">
               <DisclosurePanel
                 transition
                 className="origin-top transition duration-100 ease-in-out data-[closed]:-translate-y-6 data-[closed]:opacity-0"
               >
-                <div className="w-full flex flex-col p-1.5 pl-4 pt-3 gap-y-2">
-                 {task.subTasks.map((subTask: any) => (
-                   <SubTask key={subTask.subTaskID} subTask={subTask}/>
-                 ))}
+                <div className="w-full flex flex-col p-0.5 gap-y-1 2xl:p-1.5 2xl:pl-4 2xl:pt-3 2xl:gap-y-2">
+                  {task.subTasks.map((subTask: any) => (
+                    <SubTask key={subTask.subTaskID} subTask={subTask} />
+                  ))}
                 </div>
               </DisclosurePanel>
             </div>
           </Disclosure>
-   
         </div>
       )}
     </Draggable>

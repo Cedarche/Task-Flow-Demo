@@ -1,8 +1,3 @@
+import Team from "@/components/dashboard/team/Team";
 
-function Team() {
-    return (
-      <div>Team</div>
-    )
-  }
-  
-  export default Team
+export default Team;

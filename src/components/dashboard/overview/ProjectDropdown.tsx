@@ -17,7 +17,7 @@ function classNames(...classes: (string | false | undefined)[]) {
 export function ProjectDropdown() {
   return (
     <Dropdown>
-      <DropdownButton outline>
+      <DropdownButton outline className="cursor-pointer">
         Options
         <ChevronDownIcon />
       </DropdownButton>

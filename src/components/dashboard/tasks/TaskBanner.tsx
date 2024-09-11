@@ -19,14 +19,14 @@ export function TaskBanner() {
     <div className="flex rounded-lg items-start justify-between   bg-gray-100/60 dark:bg-gray-700/10 p-2 2xl:p-4 sm:flex-row sm:items-center sm:px-6 lg:px-8 border border-zinc-300 dark:border-white/10 mt-3">
       <div>
         <div className="flex items-center gap-x-3">
-          <div className="flex-none rounded-full text-green-400 bg-green-400/30 p-1 dark:bg-green-400/10 dark:text-green-400">
+          <div className="hidden sm:flex-none rounded-full text-green-400 bg-green-400/30 p-1 dark:bg-green-400/10 dark:text-green-400">
             <div className="h-2 w-2 rounded-full bg-current" />
           </div>
-          <h1 className="flex gap-x-3 text-base leading-7">
-            <span className="font-semibold text-black dark:text-white">
+          <h1 className=" hidden sm:flex gap-x-3 text-base leading-7">
+            <span className=" font-semibold text-black dark:text-white">
               Milestone
             </span>
-            <span className="text-gray-400 dark:text-gray-600">-</span>
+            <span className=" text-gray-400 dark:text-gray-600">-</span>
           </h1>
           <StageDropdown />
         </div>
