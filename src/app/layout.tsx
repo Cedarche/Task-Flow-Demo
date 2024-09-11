@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TaskStoreProvider } from "@/providers/task-store-provider";
 import { TeamStoreProvider } from "@/providers/team-store-provider";
 
@@ -34,7 +35,10 @@ export default function RootLayout({
       >
         <TeamStoreProvider>
           <TaskStoreProvider>
-            <ThemeProvider attribute="class">{children}</ThemeProvider>
+            <ThemeProvider attribute="class" defaultTheme="system">
+              {children}
+              <SpeedInsights />
+            </ThemeProvider>
           </TaskStoreProvider>
         </TeamStoreProvider>
       </body>
