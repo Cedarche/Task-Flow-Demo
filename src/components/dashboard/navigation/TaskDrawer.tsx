@@ -78,7 +78,7 @@ export default function TaskDrawer({ open, setOpen }: any) {
               transition
               className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
             >
-              <form className="flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-gray-900 shadow-xl">
+              <form className="flex h-full flex-col divide-y divide-gray-200 bg-slate-50 dark:lg:bg-zinc-800 shadow-xl">
                 <div className="h-0 flex-1 overflow-y-auto">
                   <div className="flex flex-1 flex-col justify-between">
                     <div className="divide-y divide-gray-200 dark:divide-gray-700 px-4 sm:px-6">

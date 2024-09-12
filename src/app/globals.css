@@ -33,6 +33,14 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .h-flow-2xl {
+    height: calc(100vh - 11rem);
+  }
+
+  .h-flow-xl {
+    height: calc(100vh - 10.25rem);
+  }
 }
 
 @layer base {

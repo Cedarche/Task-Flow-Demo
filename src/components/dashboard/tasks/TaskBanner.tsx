@@ -1,4 +1,3 @@
-'use client'
 import {
   PlusIcon,
   AdjustmentsHorizontalIcon,
@@ -14,42 +13,44 @@ import {
 } from "@/components/catalyst/listbox";
 import { Button } from "@/components/catalyst/button";
 
-export function TaskBanner() {
+export function TaskBanner({ setAddTask }: any) {
   return (
-    <div className="flex rounded-lg items-start justify-between   bg-gray-100/60 dark:bg-gray-700/10 p-2 2xl:p-4 sm:flex-row sm:items-center sm:px-6 lg:px-8 border border-zinc-300 dark:border-white/10 mt-3">
-      <div>
-        <div className="flex items-center gap-x-3">
-          <div className="hidden sm:flex-none rounded-full text-green-400 bg-green-400/30 p-1 dark:bg-green-400/10 dark:text-green-400">
-            <div className="h-2 w-2 rounded-full bg-current" />
+    <>
+      <div className="flex rounded-lg items-start justify-between   bg-gray-100/60 dark:bg-gray-700/10 p-2 2xl:px-3 sm:flex-row sm:items-center sm:px-6 lg:px-8 border border-zinc-300 dark:border-white/10 mt-3">
+        <div>
+          <div className="flex items-center gap-x-3">
+            <div className="hidden sm:flex-none rounded-full text-green-400 bg-green-400/30 p-1 dark:bg-green-400/10 dark:text-green-400">
+              <div className="h-2 w-2 rounded-full bg-current" />
+            </div>
+            <h1 className=" hidden sm:flex gap-x-3 text-base leading-7">
+              <span className=" font-semibold text-black dark:text-white">
+                Milestone
+              </span>
+              <span className=" text-gray-400 dark:text-gray-600">-</span>
+            </h1>
+            <StageDropdown />
           </div>
-          <h1 className=" hidden sm:flex gap-x-3 text-base leading-7">
-            <span className=" font-semibold text-black dark:text-white">
-              Milestone
-            </span>
-            <span className=" text-gray-400 dark:text-gray-600">-</span>
-          </h1>
-          <StageDropdown />
+        </div>
+        <div className="flex flex-row gap-x-3 items-center">
+          <Button color="light">
+            <AdjustmentsHorizontalIcon />
+            <span className="hidden sm:block">Filter</span>
+          </Button>
+          <ViewDropdown />
+          <Button
+            color="light"
+            className="cursor-pointer"
+            onClick={() => setAddTask(true)}
+          >
+            <PlusIcon />
+            <span className="hidden sm:block">Add Task</span>
+          </Button>
+          <div className="hidden sm:block order-first flex-none rounded-full bg-green-100 text-green-600 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-green-200 dark:bg-green-400/10 dark:text-green-400 dark:ring-green-400/30 sm:order-none">
+            On schedule
+          </div>
         </div>
       </div>
-      <div className="flex flex-row gap-x-3 items-center">
-        <Button color="light">
-          <AdjustmentsHorizontalIcon />
-          <span className="hidden sm:block">Filter</span>
-        </Button>
-        <ViewDropdown />
-        <Button
-          color="light"
-          className="cursor-pointer"
-
-        >
-          <PlusIcon />
-          <span className="hidden sm:block">Add Stage</span>
-        </Button>
-        <div className="hidden sm:block order-first flex-none rounded-full bg-green-100 text-green-600 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-green-200 dark:bg-green-400/10 dark:text-green-400 dark:ring-green-400/30 sm:order-none">
-          On schedule
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -79,6 +80,7 @@ function ViewDropdown() {
   const router = useRouter();
   const pathname = usePathname();
   const projectID = pathname.split("/")[1];
+  const currentValue = pathname.split("/");
 
   // Handler to handle change in the dropdown value
   const handleViewChange = (value: string) => {
@@ -91,7 +93,10 @@ function ViewDropdown() {
 
   return (
     <Field>
-      <Listbox name="Grid" defaultValue="Grid" onChange={handleViewChange}>
+      <Listbox
+        defaultValue={currentValue.includes("tree") ? "Tree" : "Grid"}
+        onChange={handleViewChange}
+      >
         <ListboxOption value="Grid">
           <Squares2X2Icon />
           <ListboxLabel className="hidden sm:block">Grid</ListboxLabel>

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Heading } from "@/components/catalyst/heading";
 import { TeamDropdown } from "./TeamDropdown";
 import { TeamTable } from "./TeamTable";
@@ -53,8 +53,7 @@ export default function Team() {
                 ))}
               </ul>
             </nav>
-            {/* Stats Section */}
-            {/* <Stats stats={stats} classNames={classNames} teamList={teamList} /> */}
+
           </header>
           <TeamTable/>
         </main>

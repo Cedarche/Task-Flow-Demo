@@ -1,10 +1,4 @@
 // app/dashboard/settings/page.tsx
-export default function SettingsPage() {
-    return (
-      <div>
-        <h1 className="text-2xl font-bold">Settings</h1>
-        {/* Settings content goes here */}
-      </div>
-    );
-  }
-  
+import ProjectSettings from "@/components/dashboard/settings/ProjectSettings";
+
+export default ProjectSettings;

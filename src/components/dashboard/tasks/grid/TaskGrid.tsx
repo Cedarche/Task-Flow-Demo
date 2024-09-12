@@ -49,8 +49,6 @@ function TaskGrid() {
   const groupedTasks = groupTasksByStatus(tasks);
 
   const [state, setState] = useState(Object.values(groupedTasks));
-  const [addTask, setAddTask] = useState(false);
-
   // Sync the local state with the Zustand store
   useEffect(() => {
     setState(Object.values(groupTasksByStatus(tasks)));
@@ -93,7 +91,6 @@ function TaskGrid() {
 
   return (
     <>
-      <TaskDrawer open={addTask} setOpen={setAddTask} />
       <div className="w-full flex-1 py-1 2xl:py-4 mb-4 2xl:mb-6">
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="flex flex-1 gap-4">
@@ -118,16 +115,6 @@ function TaskGrid() {
                           {status}
                         </div>
                       </div>
-                      {status === "Not Started" && (
-                        <Button
-                          color="light"
-                          className="cursor-pointer py-0"
-                          onClick={() => setAddTask(!addTask)}
-                        >
-                          <PlusIcon />
-                          Add Task
-                        </Button>
-                      )}
                     </div>
                     <Droppable key={ind} droppableId={`${ind}`}>
                       {(provided, snapshot) => (

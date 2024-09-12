@@ -1,9 +1,3 @@
-import React from 'react'
+import TaskTree from "@/components/dashboard/tasks/tree/TaskTree";
 
-function TreeView() {
-  return (
-    <div>TreeView</div>
-  )
-}
-
-export default TreeView
+export default TaskTree;

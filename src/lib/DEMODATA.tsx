@@ -145,6 +145,17 @@ export const activityItems = [
 
 export const teamList = [
   {
+    name: "Tom Carruthers",
+    userID: "145123484512",
+    role: "Owner",
+    title: "Front-end Developer",
+    email: "t.carruthers@snappark.co",
+    task: "0034",
+    subTask: "01",
+    imageUrl:
+      "/Headshot.jpg",
+  },
+  {
     name: "Michael Foster",
     userID: "456489451239",
     email: "m.foster@snappark.co",
@@ -202,16 +213,50 @@ export const teamList = [
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhlYWRzaG90JTIwYXZhdGFyfGVufDB8fDB8fHww",
   },
   {
-    name: "Tom Carruthers",
-    userID: "145123484512",
-    role: "Owner",
-    title: "Front-end Developer",
-    email: "t.carruthers@snappark.co",
-    task: "0034",
-    subTask: "01",
+    name: "Ben Ken",
+    userID: "789456123185",
+    role: "Member",
+    title: "Project Manager",
+    email: "b.ken@snappark.co",
+    task: "0010",
+    subTask: "02",
     imageUrl:
-      "/Headshot.jpg",
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
+  {
+    name: "Lucy Rogers",
+    userID: "8493278200023",
+    role: "Member",
+    title: "Software Engineer",
+    email: "l.rogers@snappark.co",
+    task: "0030",
+    subTask: "03",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Madeline Kennedy",
+    userID: "74178451217123",
+    role: "Member",
+    title: "UI/UX Developer",
+    email: "m.kennedy@snappark.co",
+    task: "0025",
+    subTask: "11",
+    imageUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Ellie Barrett",
+    userID: "7845127878112",
+    role: "Member",
+    title: "Back-end Developer",
+    email: "e.barrett@snappark.co",
+    task: "0039",
+    subTask: "08",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+
 ];
 
 export const taskList = [
