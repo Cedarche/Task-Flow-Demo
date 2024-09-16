@@ -6,12 +6,18 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  
+}
+
+.react-flow {
+  --xy-node-background-color-default: #ff5050;
 }
 
 /* Override for dark theme */
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+.dark .react-flow__node {
+  background: #777;
+  color: white;
 }
 
 body {

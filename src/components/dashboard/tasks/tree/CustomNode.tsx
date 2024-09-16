@@ -13,7 +13,8 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Task } from "@/stores/task-store";
-
+import SubTask from "../grid/SubTask";
+import { teamList } from "@/lib/DEMODATA";
 
 const statusColors: Record<Task["status"], string> = {
   notStarted:
@@ -27,10 +28,10 @@ const statusColors: Record<Task["status"], string> = {
 };
 
 function CustomNode({ data }: any) {
-    const statusClass = statusColors['started' as keyof typeof statusColors];
+  const statusClass = statusColors["started" as keyof typeof statusColors];
 
   return (
-    <div className="overflow-hidden flex flex-col rounded-lg bg-zinc-100 mb-2 2xl:mb-4 dark:bg-zinc-800 max-w-[460px]  shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
+    <div className="overflow-hidden flex flex-col rounded-lg bg-zinc-100 mb-2 2xl:mb-4 dark:bg-zinc-800 max-w-[300px] 2xl:max-w-[460px]  shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
       <div className="p-3 2xl:p-5">
         <div className="flex items-start mb-2 w-full justify-between">
           <div
@@ -38,76 +39,84 @@ function CustomNode({ data }: any) {
           >
             <RectangleStackIcon className="size-4 2xl:size-6 mr-2 " />
             <div className="font-mono text-xs 2xl:text-sm leading-6 text-gray-500 dark:text-gray-400 ">
-              {data.label}
+              {data.taskID}
             </div>
           </div>
-          <XMarkIcon className="size-4 2xl:size-6  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400" />
+          <XMarkIcon
+            className="size-4 2xl:size-6  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400"
+            // onClick={() => {
+            //   const newState = [...state];
+            //   newState[ind].splice(index, 1);
+            //   setState(newState.filter((group) => group.length));
+            // }}
+          />
         </div>
         <div className="flex flex-row">
           <div className="flex-grow flex flex-col">
             <dt className="truncate text-sm 2xl:text-base font-bold text-gray-700 dark:text-gray-200">
-              Task Name
+              {data.taskName}
             </dt>
-            <dt className="mt-2 truncate text-xs 2xl:text-sm text-wrap text-gray-600 dark:text-gray-400">
-            Create a user profile settings page that allows users to update their personal information and preferences.
+            <dt className="mt-2 truncate  text-xs 2xl:text-sm text-wrap text-gray-600 dark:text-gray-400">
+              {truncateText(data.taskDescription, 100)}
             </dt>
           </div>
           <div
             id="Subtask summary"
-            className="hidden 2xl:flex flex-none  w-[50px]   items-center justify-center ml-4"
+            className="hidden 2xl:flex flex-none  max-w-[50px]  items-center justify-center ml-4"
           >
-            <CircularProgressbar value={50} text={`${50}%`} />
+            <CircularProgressbar
+              value={data.percentComplete}
+              text={`${data.percentComplete}%`}
+            />
           </div>
         </div>
         <div className="flex w-full items-center justify-between">
-          <div className="flex flex-row pl-2 mt-3 min-w-[40px]">Team List</div>
+          <div className="flex flex-row pl-2 mt-3 min-w-[40px]">
+            {data.assignedUsers.map((user: string) => {
+              const teamMember = teamList.find(
+                (obj: any) => obj.userID === user
+              );
+              return teamMember ? (
+                <img
+                  key={user}
+                  alt={teamMember.name}
+                  src={teamMember.imageUrl}
+                  className="size-5 2xl:size-7 -ml-2 border-2 border-indigo-400 dark:border-green-400/20 rounded-full object-cover bg-gray-200 dark:bg-gray-800"
+                />
+              ) : null;
+            })}
+          </div>
           <dt className="mt-2 truncate text-xs 2xl:text-sm text-wrap text-gray-600 dark:text-gray-400">
-            Start Date
+            {data.startDate}
           </dt>
         </div>
       </div>
-      <Disclosure
-        as="div"
-        className="w-full flex flex-col cursor-pointer p-1.5 border-t  bg-zinc-200/50 dark:bg-zinc-700/50"
-      >
-        <DisclosureButton className="w-full flex items-center justify-between">
-          <div className="text-xs 2xl:text-sm text-gray-500 ml-1.5 my-1 dark:text-gray-400">
-            Sub tasks
-          </div>
 
-          <ChevronDoubleDownIcon className="size-3 2xl:size-4 mr-1.5 my-1 text-gray-500 dark:text-gray-400" />
-        </DisclosureButton>
-        <div className="overflow-hidden ">
-          <DisclosurePanel
-            transition
-            className="origin-top transition duration-100 ease-in-out data-[closed]:-translate-y-6 data-[closed]:opacity-0"
-          >
-            <div className="w-full flex flex-col p-0.5 gap-y-1 2xl:p-1.5 2xl:pl-4 2xl:pt-3 2xl:gap-y-2">
-              Hello
-              
-            </div>
-            <div className="w-full flex flex-col p-0.5 gap-y-1 2xl:p-1.5 2xl:pl-4 2xl:pt-3 2xl:gap-y-2">
-              Hello
-              
-            </div>
-          </DisclosurePanel>
-        </div>
-      </Disclosure>
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="h-5 w-5 !bg-teal-500"
+      />
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="h-5 w-5 !bg-teal-500"
+      />
     </div>
   );
 }
 
 export default memo(CustomNode);
 
-{
-  /* <Handle
-  type="target"
-  position={Position.Right}
-  className="w-16 !bg-teal-500"
-/>
-<Handle
-  type="source"
-  position={Position.Left}
-  className="w-16 !bg-teal-500"
-/> */
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+
+  const truncatedText = text.slice(0, maxLength);
+  const lastSpaceIndex = truncatedText.lastIndexOf(" ");
+
+  if (lastSpaceIndex === -1) {
+    return truncatedText + "...";
+  }
+
+  return truncatedText.slice(0, lastSpaceIndex) + "...";
 }

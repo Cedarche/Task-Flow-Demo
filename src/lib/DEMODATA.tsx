@@ -152,8 +152,7 @@ export const teamList = [
     email: "t.carruthers@snappark.co",
     task: "0034",
     subTask: "01",
-    imageUrl:
-      "/Headshot.jpg",
+    imageUrl: "/Headshot.jpg",
   },
   {
     name: "Michael Foster",
@@ -256,7 +255,6 @@ export const teamList = [
     imageUrl:
       "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
-
 ];
 
 export const taskList = [
@@ -269,10 +267,11 @@ export const taskList = [
     started: true,
     completed: false,
     percentComplete: 66,
-    taskName: "Update login screen",
+    taskName: "Implement Authentication Flow",
     taskDescription:
-      "The login screen needs to be refactored to properly accept authentication types and to conform to new style guidelines.",
+      "Refactor the login and registration flow to handle multiple authentication types, ensuring smooth user experience.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -281,7 +280,8 @@ export const taskList = [
         completionDate: null,
         completed: false,
         subTaskName: "Refactor login button",
-        subTaskDescription: "",
+        subTaskDescription:
+          "Redesign the login button to match the new theme and handle multiple authentication providers.",
         assignedUsers: ["231232133435", "849327232321"],
       },
     ],
@@ -291,14 +291,15 @@ export const taskList = [
     stage: "4",
     status: "started",
     started: true,
-    startDate: "8/09/2024 - 9:00 am", // now()
+    startDate: "8/09/2024 - 9:00 am",
     completed: false,
     completionDate: null,
     percentComplete: 16,
-    taskName: "Refactor register screen",
+    taskName: "Integrate Push Notifications",
     taskDescription:
-      "The register screen needs to be updated to match the new design specifications and to improve user experience.",
+      "Add push notification functionality to keep users informed about important updates.",
     assignedUsers: ["039408328981"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -307,9 +308,8 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["039408328981"],
-        subTaskName: "Update form validation",
-        subTaskDescription:
-          "Ensure form validation aligns with new guidelines.",
+        subTaskName: "Setup notification services",
+        subTaskDescription: "Configure Firebase for push notifications.",
       },
       {
         subTaskID: "02",
@@ -318,9 +318,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["039408328981"],
-        subTaskName: "Improve UI elements",
+        subTaskName: "Handle in-app notifications",
         subTaskDescription:
-          "Enhance the design and layout of input fields and buttons.",
+          "Create in-app notification handlers to display messages within the app.",
       },
     ],
   },
@@ -333,10 +333,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Update authentication flow",
+    taskName: "Optimize Performance",
     taskDescription:
-      "Revise the authentication flow functions to ensure compatibility with new security standards and to optimize performance.",
+      "Analyze and optimize performance bottlenecks across the application to improve user experience.",
     assignedUsers: ["456489451239"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -345,9 +346,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["456489451239"],
-        subTaskName: "Refactor login function",
+        subTaskName: "Refactor image loading",
         subTaskDescription:
-          "Update login function to handle new authentication methods.",
+          "Improve the image loading logic to optimize speed and responsiveness.",
       },
       {
         subTaskID: "02",
@@ -356,9 +357,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["456489451239"],
-        subTaskName: "Enhance security checks",
+        subTaskName: "Optimize state management",
         subTaskDescription:
-          "Add additional security checks to ensure data protection.",
+          "Ensure efficient state management using Recoil to avoid unnecessary renders.",
       },
     ],
   },
@@ -371,10 +372,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Implement user profile settings",
+    taskName: "User Profile Settings",
     taskDescription:
-      "Create a user profile settings page that allows users to update their personal information and preferences.",
-    assignedUsers: ["567890123456", "678901234567"],
+      "Develop the user profile settings page, enabling users to update their information and preferences.",
+    assignedUsers: ["039408328981"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -384,8 +386,7 @@ export const taskList = [
         completed: false,
         assignedUsers: ["567890123456", "678901234567"],
         subTaskName: "Design profile settings page",
-        subTaskDescription:
-          "Create mockups and design the layout for the profile settings page.",
+        subTaskDescription: "Create mockups for the profile settings screen.",
       },
       {
         subTaskID: "02",
@@ -394,9 +395,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["567890123456", "678901234567"],
-        subTaskName: "Implement update functionality",
+        subTaskName: "Implement settings functionality",
         subTaskDescription:
-          "Develop the functionality to update user profile information.",
+          "Develop the functionality to allow users to update profile information.",
       },
       {
         subTaskID: "03",
@@ -405,9 +406,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["567890123456", "678901234567"],
-        subTaskName: "Test user profile settings",
+        subTaskName: "Test profile settings",
         subTaskDescription:
-          "Conduct thorough testing to ensure all features work correctly.",
+          "Test the profile settings page to ensure smooth operation.",
       },
     ],
   },
@@ -420,10 +421,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Stage 3",
+    taskName: "Navigation Setup",
     taskDescription:
-      "Create a user profile settings page that allows users to update their personal information and preferences.",
+      "Set up navigation across the app, ensuring smooth transitions between screens.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: ["0033", "0034"],
     subTasks: [
       {
         subTaskID: "01",
@@ -432,9 +434,8 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Design profile settings page",
-        subTaskDescription:
-          "Create mockups and design the layout for the profile settings page.",
+        subTaskName: "Configure React Navigation",
+        subTaskDescription: "Set up React Navigation for multi-screen flow.",
       },
       {
         subTaskID: "02",
@@ -443,9 +444,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Implement update functionality",
+        subTaskName: "Handle deep linking",
         subTaskDescription:
-          "Develop the functionality to update user profile information.",
+          "Implement deep linking to allow navigation to specific app screens via external links.",
       },
       {
         subTaskID: "03",
@@ -454,9 +455,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Test user profile settings",
+        subTaskName: "Test navigation flow",
         subTaskDescription:
-          "Conduct thorough testing to ensure all features work correctly.",
+          "Ensure all screens are correctly linked and transitions work as expected.",
       },
     ],
   },
@@ -473,6 +474,7 @@ export const taskList = [
     taskDescription:
       "Create a user profile settings page that allows users to update their personal information and preferences.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -518,10 +520,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Stage 2",
+    taskName: "Splash Screen Implementation",
     taskDescription:
-      "Create a user profile settings page that allows users to update their personal information and preferences.",
+      "Design and implement a splash screen to enhance the user experience during app launch.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -530,9 +533,8 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Design profile settings page",
-        subTaskDescription:
-          "Create mockups and design the layout for the profile settings page.",
+        subTaskName: "Design splash screen",
+        subTaskDescription: "Create a visually appealing splash screen layout.",
       },
       {
         subTaskID: "02",
@@ -541,9 +543,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Implement update functionality",
+        subTaskName: "Add animations",
         subTaskDescription:
-          "Develop the functionality to update user profile information.",
+          "Incorporate animations to make the splash screen engaging.",
       },
       {
         subTaskID: "03",
@@ -552,9 +554,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Test user profile settings",
+        subTaskName: "Test splash screen",
         subTaskDescription:
-          "Conduct thorough testing to ensure all features work correctly.",
+          "Ensure the splash screen behaves correctly on app startup.",
       },
     ],
   },
@@ -567,10 +569,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Stage 1",
+    taskName: "Implement User Authentication",
     taskDescription:
-      "Create a user profile settings page that allows users to update their personal information and preferences.",
+      "Set up user authentication flow, including login, signup, and password recovery screens.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -579,9 +582,9 @@ export const taskList = [
         completionDate: null,
         completed: true,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Design profile settings page",
+        subTaskName: "Design authentication screens",
         subTaskDescription:
-          "Create mockups and design the layout for the profile settings page.",
+          "Create mockups and design layouts for login, signup, and recovery screens.",
       },
       {
         subTaskID: "02",
@@ -590,9 +593,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Implement update functionality",
+        subTaskName: "Implement authentication logic",
         subTaskDescription:
-          "Develop the functionality to update user profile information.",
+          "Develop the logic for handling user authentication using Firebase or another service.",
       },
       {
         subTaskID: "03",
@@ -601,9 +604,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Test user profile settings",
+        subTaskName: "Test authentication flow",
         subTaskDescription:
-          "Conduct thorough testing to ensure all features work correctly.",
+          "Ensure all authentication functionalities work correctly, including error handling.",
       },
     ],
   },
@@ -616,10 +619,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Fix Homescreen",
+    taskName: "Fix Main Screen Layout",
     taskDescription:
-      "Create a user profile settings page that allows users to update their personal information and preferences.",
+      "Refactor and fix issues with the layout of the main screen to enhance user experience.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -628,9 +632,9 @@ export const taskList = [
         completionDate: null,
         completed: true,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Design profile settings page",
+        subTaskName: "Design main screen layout",
         subTaskDescription:
-          "Create mockups and design the layout for the profile settings page.",
+          "Create mockups and adjust layouts for the main home screen.",
       },
       {
         subTaskID: "02",
@@ -639,9 +643,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Implement update functionality",
+        subTaskName: "Implement responsive design",
         subTaskDescription:
-          "Develop the functionality to update user profile information.",
+          "Ensure the main screen layout adapts to different screen sizes and resolutions.",
       },
       {
         subTaskID: "03",
@@ -650,25 +654,26 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Test user profile settings",
+        subTaskName: "Test screen layout",
         subTaskDescription:
-          "Conduct thorough testing to ensure all features work correctly.",
+          "Test the screen layout across multiple devices and orientations.",
       },
     ],
   },
   {
-    taskID: "0041",
-    stage: "4",
+    taskID: "0032",
+    stage: "3",
     status: "notStarted",
     startDate: "7/09/2024 - 5:56 pm",
     completionDate: null,
     started: true,
     completed: false,
     percentComplete: 66,
-    taskName: "Update login screen",
+    taskName: "Implement Social Login",
     taskDescription:
-      "The login screen needs to be refactored to properly accept authentication types and to conform to new style guidelines.",
+      "Refactor the login screen to support social logins (Google, Facebook, etc.) and ensure style consistency.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: [],
     subTasks: [
       {
         subTaskID: "01",
@@ -677,24 +682,25 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Refactor login button",
-        subTaskDescription: "",
+        subTaskName: "Integrate Google login",
+        subTaskDescription: "Set up Google login functionality with Firebase.",
       },
     ],
   },
   {
-    taskID: "0042",
-    stage: "4",
+    taskID: "0020",
+    stage: "2",
     status: "notStarted",
     startDate: "7/09/2024 - 5:56 pm",
     completionDate: null,
     started: true,
     completed: false,
     percentComplete: 66,
-    taskName: "Update login screen",
+    taskName: "Enhance Push Notification System",
     taskDescription:
-      "The login screen needs to be refactored to properly accept authentication types and to conform to new style guidelines.",
+      "Update push notification logic to handle more complex interactions like in-app and external notifications.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: ["0030", "0031"],
     subTasks: [
       {
         subTaskID: "01",
@@ -703,24 +709,26 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Refactor login button",
-        subTaskDescription: "",
+        subTaskName: "Improve notification handling",
+        subTaskDescription:
+          "Update handlers to manage multiple notification types.",
       },
     ],
   },
   {
-    taskID: "0040",
-    stage: "4",
+    taskID: "0012",
+    stage: "1",
     status: "notStarted",
     startDate: "7/09/2024 - 5:56 pm",
     completionDate: null,
     started: true,
     completed: false,
     percentComplete: 66,
-    taskName: "Update login screen",
+    taskName: "Refactor App Splash Screen",
     taskDescription:
-      "The login screen needs to be refactored to properly accept authentication types and to conform to new style guidelines.",
+      "The splash screen needs optimization for different screen resolutions and loading performance.",
     assignedUsers: ["231232133435", "849327232321"],
+    childTasks: ["0029", "0020"],
     subTasks: [
       {
         subTaskID: "01",
@@ -729,8 +737,9 @@ export const taskList = [
         completionDate: null,
         completed: false,
         assignedUsers: ["231232133435", "849327232321"],
-        subTaskName: "Refactor login button",
-        subTaskDescription: "",
+        subTaskName: "Optimize splash screen performance",
+        subTaskDescription:
+          "Refactor code to reduce load time and ensure high-resolution compatibility.",
       },
     ],
   },

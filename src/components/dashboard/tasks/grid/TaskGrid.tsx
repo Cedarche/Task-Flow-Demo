@@ -8,6 +8,7 @@ import {
   DraggableProvided,
   DraggableStateSnapshot,
 } from "@hello-pangea/dnd";
+import { Subheading } from "@/components/catalyst/heading";
 import { Button } from "@/components/catalyst/button";
 import { reorder, move, groupTasksByStatus } from "./GridFunctions";
 import { PlusIcon } from "@heroicons/react/16/solid";
@@ -15,7 +16,6 @@ import TaskDrawer from "../../navigation/TaskDrawer";
 import { taskList } from "@/lib/DEMODATA";
 import DraggableItem from "./DraggableTask"; // Import the new DraggableItem component
 import { useTaskStore } from "@/providers/task-store-provider";
-import { Task } from "@/stores/task-store";
 
 const statusStyles: Record<string, { textColor: string; bgColor: string }> = {
   "Not Started": {
@@ -112,7 +112,7 @@ function TaskGrid() {
                           />
                         </div>
                         <div className="my-2 pl-2 flex text-sm 2xl:text-base font-bold">
-                          {status}
+                          <Subheading>{status}</Subheading>
                         </div>
                       </div>
                     </div>
@@ -164,12 +164,3 @@ function TaskGrid() {
 
 export default TaskGrid;
 
-// const groupTasksByStage = (tasks: typeof taskList) => {
-//   return tasks.reduce((acc: Record<string, any[]>, task) => {
-//     if (!acc[task.stage]) {
-//       acc[task.stage] = [];
-//     }
-//     acc[task.stage].push(task);
-//     return acc;
-//   }, {});
-// };

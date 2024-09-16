@@ -16,6 +16,7 @@ export type Task = {
   taskDescription: string;
   assignedUsers: string[];
   subTasks: SubTask[];
+  childTasks?: string[] | any;
 };
 
 export type SubTask = {

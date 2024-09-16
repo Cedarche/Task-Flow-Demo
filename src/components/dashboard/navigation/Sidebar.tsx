@@ -61,10 +61,10 @@ export default function LayoutSidebar({ children }: any) {
         <Navbar>
           <NavbarSpacer />
           <NavbarSection>
-            <NavbarItem href="/search" aria-label="Search">
+            <NavbarItem aria-label="Search">
               <MagnifyingGlassIcon />
             </NavbarItem>
-            <NavbarItem href="/inbox" aria-label="Inbox">
+            <NavbarItem  aria-label="Inbox">
               <InboxIcon />
             </NavbarItem>
             <Dropdown>
