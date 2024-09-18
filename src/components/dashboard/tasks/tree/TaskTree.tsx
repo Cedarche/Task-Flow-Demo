@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ReactFlow,
   addEdge,
@@ -38,6 +38,7 @@ function TaskTree() {
   // const [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
+
   const { width } = useWindowDimensions();
 
   const onConnect = useCallback(
@@ -54,13 +55,94 @@ function TaskTree() {
     },
   };
 
-  useEffect(() => {
-    const { nodes: groupedNodes, edges: generatedEdges } = groupTasksByStage(tasks); // Create nodes and edges
-    setNodes(groupedNodes); // Set the new nodes
-    setEdges(generatedEdges); // Set the new edges
-  }, [tasks, setNodes, setEdges]);
+  const getAllDescendants = (taskId: string, nodes: any[]): string[] => {
+    const descendants: string[] = [];
 
-  useEffect(() => {
+    const findDescendants = (id: string) => {
+      const childNodes = nodes.filter((node) => node.parentId === id);
+
+      childNodes.forEach((child) => {
+        if (!descendants.includes(child.id)) {
+          descendants.push(child.id);
+          findDescendants(child.id); // Recursively find descendants
+        }
+      });
+    };
+
+    findDescendants(taskId);
+    return descendants;
+  };
+
+  // Toggle the visibility of a task's child tasks
+  const toggleChildVisibility = (taskId: string) => {
+    // Find the selected task node
+    let taskData = nodes.find((e) => e.id === taskId);
+    // Get the array of child task IDs from the selected task node
+    const childArray = taskData?.data.childTasks || [];
+    // Find the nodes that match the child tasks in the current nodes array
+    let childTasksArray = nodes.filter((node) =>
+      childArray.includes(node.data.taskID)
+    );
+
+    let allDescendantsArray = [...childTasksArray];
+
+    childTasksArray.forEach((e) => {
+      if (e.data.childTasks.length > 0) {
+        let subChildrenArray = nodes.filter((node) =>
+          e.data.childTasks.includes(node.data.taskID)
+        );
+        subChildrenArray.forEach((s) => {
+          allDescendantsArray.push(s);
+          let subSubChildrenArray = nodes.filter((node) =>
+            s.data.childTasks.includes(node.data.taskID)
+          );
+          subSubChildrenArray.forEach((x) => {
+            allDescendantsArray.push(x);
+          });
+        });
+      }
+    });
+
+
+
+    // Update the visibility of the child task nodes
+    setNodes((prevNodes) => {
+      const updatedNodes = prevNodes.map((node) => {
+        // Check if the node is one of the child nodes and toggle its visibility
+        if (allDescendantsArray.some((childNode) => childNode.id === node.id)) {
+          return {
+            ...node,
+            hidden: !node.hidden,
+          };
+        }
+        return node;
+      });
+
+      return updatedNodes;
+    });
+    // Hide the edges connected to the child tasks
+    setEdges((prevEdges) => {
+      // Find the IDs of child tasks to hide
+      const childIds = allDescendantsArray.map((task) => task.id);
+
+      // Filter edges to hide those connecting to the child tasks
+      const updatedEdges = prevEdges.map((edge) => {
+        if (childIds.includes(edge.target)) {
+          return {
+            ...edge,
+            hidden: !edge.hidden, // Set to false to visually hide the edge or use a different strategy if needed
+          };
+        }
+        return edge;
+      });
+
+      return updatedEdges;
+    });
+
+    recalculateNodePositions();
+  };
+
+  const recalculateNodePositions = () => {
     let hasChanges = false; // Flag to track if any changes were made
 
     // Calculate the x offset based on screen width
@@ -86,13 +168,16 @@ function TaskTree() {
         // Set the spacing and initial y-position
         const nodeHeight = 200; // Fixed height for each node
         const spacing = 20; // Space between nodes
-        const newHeight = childNodes.length * (nodeHeight + spacing); // Calculate group height
+
+        const visibleChildNodes = childNodes.filter((n) => !n.hidden);
+
+        const newHeight = visibleChildNodes.length * (nodeHeight + spacing); // Calculate group height
 
         // Calculate the new x position based on the stage index and xOffset
         const newX = stageIndex * xOffset;
 
         // Dynamically set the y position for each child node
-        childNodes.forEach((childNode, childIndex) => {
+        visibleChildNodes.forEach((childNode, childIndex) => {
           const newY = childIndex * (nodeHeight + spacing) + spacing;
           childNode.position = { ...childNode.position, y: newY };
         });
@@ -128,32 +213,51 @@ function TaskTree() {
       console.log("Nodes have changed!");
       setNodes(updatedNodes); // Update nodes
     }
-  }, [width, nodes, setNodes]);
+  };
+
+  useEffect(() => {
+    recalculateNodePositions();
+  }, [nodes, width]);
+
+  useEffect(() => {
+    const { nodes: groupedNodes, edges: generatedEdges } =
+      groupTasksByStage(tasks); // Create nodes and edges
+    setNodes(groupedNodes); // Set the new nodes
+    setEdges(generatedEdges); // Set the new edges
+  }, [tasks, setNodes, setEdges]);
 
   return (
     <div className="border rounded-lg overflow-hidden border-zinc-300 dark:border-white/10 mt-3 h-flow-xl 2xl:h-flow-2xl">
       <ReactFlow
         colorMode={colorMode}
-        nodes={nodes}
+        nodes={nodes.map((node) => ({
+          ...node,
+          data: {
+            ...node.data,
+            toggleVisibility: () => toggleChildVisibility(node.id),
+            hidden: node.hidden,
+          },
+        }))}
         edges={edges}
         nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        // panOnScroll
-        // selectionOnDrag
-        // panOnDrag={panOnDrag}
-        // selectionMode={SelectionMode.Partial}
         fitView
         attributionPosition="bottom-right"
         nodesDraggable={false}
-        defaultEdgeOptions={edgeOptions} // Set edge options
+        defaultEdgeOptions={edgeOptions}
       >
         <Controls position="top-right" />
-        <Background  variant={BackgroundVariant.Dots} />
+        <Background variant={BackgroundVariant.Dots} />
       </ReactFlow>
     </div>
   );
 }
 
 export default TaskTree;
+
+// panOnScroll
+// selectionOnDrag
+// panOnDrag={panOnDrag}
+// selectionMode={SelectionMode.Partial}

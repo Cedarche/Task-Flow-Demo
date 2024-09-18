@@ -10,6 +10,8 @@ import {
 import {
   RectangleStackIcon,
   ChevronDoubleDownIcon,
+  EyeIcon,
+  EyeSlashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Task } from "@/stores/task-store";
@@ -27,7 +29,7 @@ const statusColors: Record<Task["status"], string> = {
     "bg-green-50 text-green-700 ring-green-600/20 dark:text-green-400 dark:ring-green-500/20 dark:bg-green-500/10",
 };
 
-function CustomNode({ data }: any) {
+function CustomNode({ data, hidden }: any) {
   const statusClass = statusColors["started" as keyof typeof statusColors];
 
   return (
@@ -42,14 +44,12 @@ function CustomNode({ data }: any) {
               {data.taskID}
             </div>
           </div>
-          <XMarkIcon
-            className="size-4 2xl:size-6  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400"
-            // onClick={() => {
-            //   const newState = [...state];
-            //   newState[ind].splice(index, 1);
-            //   setState(newState.filter((group) => group.length));
-            // }}
-          />
+          {data.childTasks.length > 0 && (
+            <EyeSlashIcon
+              className="size-4 2xl:size-6  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400"
+              onClick={data.toggleVisibility}
+            />
+          )}
         </div>
         <div className="flex flex-row">
           <div className="flex-grow flex flex-col">
@@ -91,17 +91,20 @@ function CustomNode({ data }: any) {
           </dt>
         </div>
       </div>
-
-      <Handle
-        type="target"
-        position={Position.Left}
-        className="h-5 w-5 !bg-teal-500"
-      />
-      <Handle
-        type="source"
-        position={Position.Right}
-        className="h-5 w-5 !bg-teal-500"
-      />
+      {data.stage !== "1" && (
+        <Handle
+          type="target"
+          position={Position.Left}
+          className="h-5 w-5 !bg-teal-500"
+        />
+      )}
+      {data.stage !== "4" && (
+        <Handle
+          type="source"
+          position={Position.Right}
+          className="h-5 w-5 !bg-teal-500"
+        />
+      )}
     </div>
   );
 }

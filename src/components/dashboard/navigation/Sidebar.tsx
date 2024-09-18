@@ -168,29 +168,29 @@ export default function LayoutSidebar({ children }: any) {
                 <Cog6ToothIcon />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href={`/${projectID}/dashboard/discussion`}>
+              <SidebarItem >
                 <ChatBubbleLeftRightIcon />
                 <SidebarLabel>Discussion</SidebarLabel>
               </SidebarItem>
             </SidebarSection>
             <SidebarSection className="max-2xl:hidden">
               <SidebarHeading>Latest Task Changes</SidebarHeading>
-              <SidebarItem href="/events/1">
+              <SidebarItem >
                 <RectangleGroupIcon className="h-6 w-6  text-blue-400" />
                 <span className="font-mono text-sm leading-1">0035</span>{" "}
                 Started
               </SidebarItem>
-              <SidebarItem href="/events/1">
+              <SidebarItem >
                 <RectangleGroupIcon className="h-6 w-6  text-blue-400" />
                 <span className="font-mono text-sm leading-1">0034</span>{" "}
                 Started
               </SidebarItem>
-              <SidebarItem href="/events/1">
+              <SidebarItem >
                 <RectangleGroupIcon className="h-6 w-6  text-blue-400" />
                 <span className="font-mono text-sm leading-1">0033</span>{" "}
                 Started
               </SidebarItem>
-              <SidebarItem href="/events/1">
+              <SidebarItem >
                 <RectangleGroupIcon className="h-6 w-6 text-blue-400" />
                 <span className="font-mono text-sm leading-1">0032</span>{" "}
                 Completed
@@ -199,13 +199,13 @@ export default function LayoutSidebar({ children }: any) {
             <SidebarSpacer />
             <SidebarSection>
               <ThemeToggle />
-              <SidebarItem href="/support">
+              <SidebarItem href="https://tomcarruthers.com/contact" target="_blank">
                 <QuestionMarkCircleIcon />
-                <SidebarLabel>Support</SidebarLabel>
+                <SidebarLabel>Contact</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/changelog">
+              <SidebarItem href="https://github.com/Cedarche/NextJS-Demo" target="_blank">
                 <SparklesIcon />
-                <SidebarLabel>Changelog</SidebarLabel>
+                <SidebarLabel>Github Repository</SidebarLabel>
               </SidebarItem>
             </SidebarSection>
           </SidebarBody>

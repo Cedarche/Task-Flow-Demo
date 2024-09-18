@@ -17,6 +17,7 @@ export type Task = {
   assignedUsers: string[];
   subTasks: SubTask[];
   childTasks?: string[] | any;
+  isVisible: boolean;
 };
 
 export type SubTask = {

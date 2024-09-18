@@ -258,6 +258,7 @@ export const teamList = [
 ];
 
 export const taskList = [
+
   {
     taskID: "0033",
     stage: "4",
@@ -272,6 +273,7 @@ export const taskList = [
       "Refactor the login and registration flow to handle multiple authentication types, ensuring smooth user experience.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -300,6 +302,7 @@ export const taskList = [
       "Add push notification functionality to keep users informed about important updates.",
     assignedUsers: ["039408328981"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -338,6 +341,7 @@ export const taskList = [
       "Analyze and optimize performance bottlenecks across the application to improve user experience.",
     assignedUsers: ["456489451239"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -377,6 +381,7 @@ export const taskList = [
       "Develop the user profile settings page, enabling users to update their information and preferences.",
     assignedUsers: ["039408328981"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -426,6 +431,7 @@ export const taskList = [
       "Set up navigation across the app, ensuring smooth transitions between screens.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: ["0033", "0034"],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -475,6 +481,7 @@ export const taskList = [
       "Create a user profile settings page that allows users to update their personal information and preferences.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -512,6 +519,35 @@ export const taskList = [
     ],
   },
   {
+    taskID: "0021",
+    stage: "2",
+    started: true,
+    status: "complete",
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 5,
+    taskName: "Firebase Authentication Setup",
+    taskDescription:
+      "Enable Firebase Auth within the application using RN-Firebase.",
+    assignedUsers: ["231232133435"],
+    childTasks: [],
+    isVisible: true,
+    subTasks: [
+      {
+        subTaskID: "01",
+        startDate: "9/09/2024 - 2:00 pm",
+        started: true,
+        completionDate: null,
+        completed: false,
+        assignedUsers: ["231232133435", "849327232321"],
+        subTaskName: "Link Application to Firebase",
+        subTaskDescription:
+          "Link the application to the firebase auth project.",
+      },
+    ],
+  },
+  {
     taskID: "0029",
     stage: "2",
     started: true,
@@ -525,6 +561,7 @@ export const taskList = [
       "Design and implement a splash screen to enhance the user experience during app launch.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -573,7 +610,8 @@ export const taskList = [
     taskDescription:
       "Set up user authentication flow, including login, signup, and password recovery screens.",
     assignedUsers: ["231232133435", "849327232321"],
-    childTasks: [],
+    childTasks: ["0021"],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -624,6 +662,7 @@ export const taskList = [
       "Refactor and fix issues with the layout of the main screen to enhance user experience.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -674,6 +713,7 @@ export const taskList = [
       "Refactor the login screen to support social logins (Google, Facebook, etc.) and ensure style consistency.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: [],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -701,6 +741,7 @@ export const taskList = [
       "Update push notification logic to handle more complex interactions like in-app and external notifications.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: ["0030", "0031"],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
@@ -729,6 +770,7 @@ export const taskList = [
       "The splash screen needs optimization for different screen resolutions and loading performance.",
     assignedUsers: ["231232133435", "849327232321"],
     childTasks: ["0029", "0020"],
+    isVisible: true,
     subTasks: [
       {
         subTaskID: "01",
