@@ -116,7 +116,7 @@ export default function LayoutSidebar({ children }: any) {
                 className="min-w-80 lg:min-w-64"
                 anchor="bottom start"
               >
-                <DropdownItem href="/teams/1">
+                <DropdownItem >
                   <Avatar
                     slot="icon"
                     initials="CC"
@@ -124,7 +124,7 @@ export default function LayoutSidebar({ children }: any) {
                   />
                   <DropdownLabel>Cross Copy</DropdownLabel>
                 </DropdownItem>
-                <DropdownItem href="/teams/2">
+                <DropdownItem >
                   <Avatar
                     slot="icon"
                     initials="R"
@@ -133,18 +133,18 @@ export default function LayoutSidebar({ children }: any) {
                   <DropdownLabel>Ream</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
-                <DropdownItem href="/teams/create">
+                <DropdownItem >
                   <PlusIcon />
                   <DropdownLabel>New project&hellip;</DropdownLabel>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
             <SidebarSection className="max-lg:hidden">
-              <SidebarItem href="/search">
+              <SidebarItem >
                 <MagnifyingGlassIcon />
                 <SidebarLabel>Search</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/inbox">
+              <SidebarItem >
                 <InboxIcon />
                 <SidebarLabel>Inbox</SidebarLabel>
               </SidebarItem>
@@ -231,25 +231,25 @@ export default function LayoutSidebar({ children }: any) {
                 <ChevronUpIcon />
               </DropdownButton>
               <DropdownMenu className="min-w-64" anchor="top start">
-                <DropdownItem href="/my-profile">
+                <DropdownItem>
                   <UserIcon />
                   <DropdownLabel>My profile</DropdownLabel>
                 </DropdownItem>
-                <DropdownItem href="/settings">
+                <DropdownItem >
                   <Cog8ToothIcon />
                   <DropdownLabel>Settings</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
-                <DropdownItem href="/privacy-policy">
+                <DropdownItem >
                   <ShieldCheckIcon />
                   <DropdownLabel>Privacy policy</DropdownLabel>
                 </DropdownItem>
-                <DropdownItem href="/share-feedback">
+                <DropdownItem >
                   <LightBulbIcon />
                   <DropdownLabel>Share feedback</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
-                <DropdownItem href="/logout">
+                <DropdownItem >
                   <ArrowRightStartOnRectangleIcon />
                   <DropdownLabel>Sign out</DropdownLabel>
                 </DropdownItem>

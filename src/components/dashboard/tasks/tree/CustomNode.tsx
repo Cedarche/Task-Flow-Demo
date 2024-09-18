@@ -29,7 +29,7 @@ const statusColors: Record<Task["status"], string> = {
     "bg-green-50 text-green-700 ring-green-600/20 dark:text-green-400 dark:ring-green-500/20 dark:bg-green-500/10",
 };
 
-function CustomNode({ data, hidden }: any) {
+function CustomNode({ data }: any) {
   const statusClass = statusColors["started" as keyof typeof statusColors];
 
   return (

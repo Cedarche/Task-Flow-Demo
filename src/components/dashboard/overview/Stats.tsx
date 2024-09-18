@@ -62,7 +62,7 @@ export function Stats({ stats, classNames, teamList }: StatsProps) {
               <span className="text-4xl font-semibold tracking-tight text-black dark:text-white">
                 {stat.name === "Team" ? (
                   <div className="flex flex-row pl-2">
-                    {teamList.map((user) => (
+                    {teamList.slice(0, 8).map((user) => (
                       <img
                         key={user.imageUrl}
                         alt=""

@@ -1,24 +1,18 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import {
   ReactFlow,
   addEdge,
-  SelectionMode,
   useEdgesState,
   useNodesState,
   Controls,
   Background,
   BackgroundVariant,
-  Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useTheme } from "next-themes";
 import useWindowDimensions from "@/components/hooks/useWindowDimensions";
 import { useTaskStore } from "@/providers/task-store-provider";
-import { Task } from "@/stores/task-store";
-
-import { initialNodes } from "./nodes.js";
-import { initialEdges } from "./edges.js";
 import CustomNode from "./CustomNode";
 import GroupNode from "./GroupNode";
 
@@ -29,13 +23,10 @@ const nodeTypes = {
   group: GroupNode,
 };
 
-const panOnDrag = [1, 2];
-
 function TaskTree() {
   const { theme } = useTheme();
   const tasks = useTaskStore((state) => state.tasks);
 
-  // const [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
 
@@ -53,24 +44,6 @@ function TaskTree() {
     style: {
       stroke: theme === "dark" ? "#d5d5d5" : "#8f8f8f", // White in dark mode, black in light mode
     },
-  };
-
-  const getAllDescendants = (taskId: string, nodes: any[]): string[] => {
-    const descendants: string[] = [];
-
-    const findDescendants = (id: string) => {
-      const childNodes = nodes.filter((node) => node.parentId === id);
-
-      childNodes.forEach((child) => {
-        if (!descendants.includes(child.id)) {
-          descendants.push(child.id);
-          findDescendants(child.id); // Recursively find descendants
-        }
-      });
-    };
-
-    findDescendants(taskId);
-    return descendants;
   };
 
   // Toggle the visibility of a task's child tasks
@@ -96,14 +69,12 @@ function TaskTree() {
           let subSubChildrenArray = nodes.filter((node) =>
             s.data.childTasks.includes(node.data.taskID)
           );
-          subSubChildrenArray.forEach((x) => {
-            allDescendantsArray.push(x);
+          subSubChildrenArray.forEach((t) => {
+            allDescendantsArray.push(t);
           });
         });
       }
     });
-
-
 
     // Update the visibility of the child task nodes
     setNodes((prevNodes) => {
@@ -120,6 +91,7 @@ function TaskTree() {
 
       return updatedNodes;
     });
+
     // Hide the edges connected to the child tasks
     setEdges((prevEdges) => {
       // Find the IDs of child tasks to hide
@@ -211,7 +183,7 @@ function TaskTree() {
     // Only update state if changes were detected
     if (hasChanges) {
       console.log("Nodes have changed!");
-      setNodes(updatedNodes); // Update nodes
+      setNodes(updatedNodes);
     }
   };
 
@@ -221,9 +193,9 @@ function TaskTree() {
 
   useEffect(() => {
     const { nodes: groupedNodes, edges: generatedEdges } =
-      groupTasksByStage(tasks); // Create nodes and edges
-    setNodes(groupedNodes); // Set the new nodes
-    setEdges(generatedEdges); // Set the new edges
+      groupTasksByStage(tasks);
+    setNodes(groupedNodes);
+    setEdges(generatedEdges);
   }, [tasks, setNodes, setEdges]);
 
   return (
@@ -235,7 +207,6 @@ function TaskTree() {
           data: {
             ...node.data,
             toggleVisibility: () => toggleChildVisibility(node.id),
-            hidden: node.hidden,
           },
         }))}
         edges={edges}
