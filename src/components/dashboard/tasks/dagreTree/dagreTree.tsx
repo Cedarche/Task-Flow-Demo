@@ -13,7 +13,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import dagre from "@dagrejs/dagre";
 import { useTheme } from "next-themes";
-import GroupNode from "../tree/GroupNode";
+import GroupNode from "./GroupNode";
 import CustomNode from "./CustomNode";
 import { useTaskStore } from "@/providers/task-store-provider";
 import useWindowDimensions from "@/components/hooks/useWindowDimensions";
@@ -25,7 +25,7 @@ const nodeTypes = {
   group: GroupNode,
 };
 
-const DagreTreeChart = () => {
+const TreeChart = () => {
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
   const tasks = useTaskStore((state) => state.tasks);
@@ -249,6 +249,7 @@ const DagreTreeChart = () => {
         }))}
         edges={edges}
         fitView
+        nodesDraggable={false}
         attributionPosition="bottom-right"
         nodeTypes={nodeTypes}
         defaultEdgeOptions={edgeOptions}
@@ -260,7 +261,7 @@ const DagreTreeChart = () => {
   );
 };
 
-export default DagreTreeChart;
+export default TreeChart;
 
 // draggable={false}
 // nodesConnectable={false}
