@@ -20,23 +20,10 @@ import useWindowDimensions from "@/components/hooks/useWindowDimensions";
 import { generateNodesFromTasks } from "./GenerateNodes";
 import { Task } from "@/stores/task-store";
 
-type groupTaskData = {
-  label: string;
-  stage: string;
-};
-
-type Node = {
-  id: string;
-  type: "group" | "custom";
-  data: Task | groupTaskData;
-  position: { x: number; y: number };
-};
-
 const nodeTypes = {
   custom: CustomNode,
   group: GroupNode,
 };
-// import "./index.css";
 
 const DagreTreeChart = () => {
   const { theme } = useTheme();
@@ -45,10 +32,9 @@ const DagreTreeChart = () => {
 
   const initialNodes = generateNodesFromTasks(tasks);
 
-  // Dynamically create edges based on `childTasks`
+  // Dynamically create edges based on childTasks
   const initialEdges = initialNodes
     .flatMap((node) => {
-      // Type guard to check if node.data is a Task before accessing childTasks
       if (node.type !== "group" && "childTasks" in node.data) {
         return (node.data as Task).childTasks?.map((childId: string) => ({
           id: `${node.id}->${childId}`,
