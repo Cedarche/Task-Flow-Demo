@@ -138,16 +138,7 @@ function TaskGrid() {
                             />
                           ))}
                           {provided.placeholder}
-                          {/* <div className="w-full flex items-center justify-end">
-                            <Button
-                              color="light"
-                              className="cursor-pointer"
-                              onClick={() => setAddTask(!addTask)}
-                            >
-                              <PlusIcon />
-                              Add Task
-                            </Button>
-                          </div> */}
+          
                         </div>
                       )}
                     </Droppable>

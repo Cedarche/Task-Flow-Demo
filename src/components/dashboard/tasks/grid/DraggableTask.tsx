@@ -82,7 +82,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
                   {task.taskName}
                 </dt>
                 <dt className="mt-2 truncate text-xs 2xl:text-sm text-wrap text-gray-600 dark:text-gray-400">
-                  {task.taskDescription}
+                  {truncateText(task.taskDescription, 100)}
                 </dt>
               </div>
               <div
@@ -147,3 +147,16 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
 };
 
 export default DraggableItem;
+
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+
+  const truncatedText = text.slice(0, maxLength);
+  const lastSpaceIndex = truncatedText.lastIndexOf(" ");
+
+  if (lastSpaceIndex === -1) {
+    return truncatedText + "...";
+  }
+
+  return truncatedText.slice(0, lastSpaceIndex) + "...";
+}

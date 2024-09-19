@@ -45,10 +45,6 @@ const DagreTreeChart = () => {
 
   const initialNodes = generateNodesFromTasks(tasks);
 
-  if (!initialNodes.length) {
-    return <div>Loading...</div>;
-  }
-
   // Dynamically create edges based on `childTasks`
   const initialEdges = initialNodes
     .flatMap((node) => {
@@ -106,7 +102,7 @@ const DagreTreeChart = () => {
           y: nodeWithPosition.y - nodeHeight / 2,
         };
         node.style = {
-          backgroundColor: '#ffffff0',
+          backgroundColor: "#ffffff0",
           borderRadius: 8,
         };
       }
@@ -249,6 +245,10 @@ const DagreTreeChart = () => {
     setHidden(!hidden);
     recalculateNodePositions();
   };
+
+  if (!initialNodes.length) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="border rounded-lg overflow-hidden border-zinc-300 dark:border-white/10 mt-3 h-flow-xl 2xl:h-flow-2xl">
