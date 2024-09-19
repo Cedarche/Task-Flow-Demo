@@ -17,6 +17,7 @@ import CustomNode from "./CustomNode";
 import GroupNode from "./GroupNode";
 
 import { groupTasksByStage } from "./groupByStage";
+import { groupTasksByStageHierarchy } from "./groupByStageHierarchy";
 
 const nodeTypes = {
   custom: CustomNode,
@@ -143,14 +144,64 @@ function TaskTree() {
 
         const visibleChildNodes = childNodes.filter((n) => !n.hidden);
 
-        const newHeight = visibleChildNodes.length * (nodeHeight + spacing); // Calculate group height
+        const newHeight = visibleChildNodes.length * nodeHeight * 2.5; // Calculate group height
 
         // Calculate the new x position based on the stage index and xOffset
         const newX = stageIndex * xOffset;
 
         // Dynamically set the y position for each child node
         visibleChildNodes.forEach((childNode, childIndex) => {
-          const newY = childIndex * (nodeHeight + spacing) + spacing;
+          let newY = 0;
+
+          // Find the parent task of the current child node
+          const parentTask = nodes.find((n) =>
+            n.data.childTasks?.includes(childNode.data.taskID)
+          );
+
+          if (parentTask) {
+            const parentYPosition = parentTask.position.y;
+            const siblingIndex = parentTask?.data.childTasks.indexOf(
+              childNode.data.taskID
+            );
+            const siblingsCount = parentTask?.data.childTasks.length;
+
+            // Check if the current child task has its own child tasks
+            const childNodeChildrenCount =
+              childNode.data.childTasks?.length || 0;
+
+            // Adjust total spacing based on whether the child node has children
+            // We leave additional space for its child tasks to prevent crowding
+            const additionalSpacingForChildren = childNodeChildrenCount
+              ? (childNodeChildrenCount - 1) * (nodeHeight + spacing)
+              : 0;
+
+            // Define the amount of space available above and below the parent task
+            const totalSpacing =
+              (siblingsCount - 1) * (nodeHeight + spacing) +
+              additionalSpacingForChildren;
+
+            // Position each child relative to the parent Y position
+            newY =
+              parentYPosition -
+              totalSpacing / 2 +
+              siblingIndex *
+                (nodeHeight +
+                  spacing +
+                  additionalSpacingForChildren / siblingsCount);
+
+            console.log("Parent Y position: ", parentYPosition);
+            console.log("Sibling count: ", siblingsCount);
+            console.log("Position in siblings: ", siblingIndex);
+            console.log(
+              "Child task count for this node: ",
+              childNodeChildrenCount
+            );
+          } else {
+            // Root tasks without a parent (i.e., Stage 1 root tasks)
+            newY = childIndex * (nodeHeight + spacing / 2) + spacing;
+          }
+
+          // Apply the calculated Y position to the child node
           childNode.position = { ...childNode.position, y: newY };
         });
 
@@ -163,16 +214,17 @@ function TaskTree() {
           hasChanges = true; // Mark that changes have been detected
           return {
             ...node,
+            hidden: visibleChildNodes.length === 0 ? true : false,
             position: {
               ...node.position,
-              x: newX, // Update the x position based on stage index
+              x: newX,
             },
             style: {
               ...node.style,
               width: newWidth,
               height: newHeight,
             },
-            draggable: false, // Disable dragging for group nodes
+            draggable: false,
           };
         }
       }

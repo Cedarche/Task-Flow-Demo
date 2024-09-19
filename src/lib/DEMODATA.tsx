@@ -21,7 +21,7 @@ export const activityItems = [
         "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
     message: "Implementing Auth Flow",
-    task: "0035",
+    task: "0045",
     subTask: "01",
     status: "Started",
     duration: "Just Now",
@@ -35,7 +35,7 @@ export const activityItems = [
         "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGF2YXRhcnN8ZW58MHx8MHx8fDA%3D",
     },
     message: "Started to refactor register screen",
-    task: "0034",
+    task: "0044",
     subTask: "01",
     status: "Started",
     duration: "Just Now",
@@ -63,7 +63,7 @@ export const activityItems = [
         "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhlYWRzaG90fGVufDB8fDB8fHww",
     },
     message: "Started to update Login Screen",
-    task: "0033",
+    task: "0043",
     subTask: "02",
     status: "Started",
     duration: "3 Hrs 25 Min",
@@ -77,7 +77,7 @@ export const activityItems = [
         "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D",
     },
     message: "Started working on Login Screen with Luke",
-    task: "0033",
+    task: "0043",
     subTask: "01",
     status: "Started",
     duration: "4 Hrs",
@@ -150,7 +150,7 @@ export const teamList = [
     role: "Owner",
     title: "Front-end Developer",
     email: "t.carruthers@snappark.co",
-    task: "0034",
+    task: "0044",
     subTask: "01",
     imageUrl: "/Headshot.jpg",
   },
@@ -258,9 +258,8 @@ export const teamList = [
 ];
 
 export const taskList = [
-
   {
-    taskID: "0033",
+    taskID: "0043",
     stage: "4",
     status: "started",
     startDate: "7/09/2024 - 5:56 pm",
@@ -289,7 +288,7 @@ export const taskList = [
     ],
   },
   {
-    taskID: "0034",
+    taskID: "0044",
     stage: "4",
     status: "started",
     started: true,
@@ -328,7 +327,7 @@ export const taskList = [
     ],
   },
   {
-    taskID: "0035",
+    taskID: "0045",
     stage: "4",
     status: "started",
     started: true,
@@ -368,7 +367,7 @@ export const taskList = [
     ],
   },
   {
-    taskID: "0036",
+    taskID: "0046",
     stage: "4",
     status: "started",
     started: true,
@@ -430,7 +429,7 @@ export const taskList = [
     taskDescription:
       "Set up navigation across the app, ensuring smooth transitions between screens.",
     assignedUsers: ["231232133435", "849327232321"],
-    childTasks: ["0033", "0034"],
+    childTasks: ["0043", "0044"],
     isVisible: true,
     subTasks: [
       {
@@ -480,7 +479,7 @@ export const taskList = [
     taskDescription:
       "Create a user profile settings page that allows users to update their personal information and preferences.",
     assignedUsers: ["231232133435", "849327232321"],
-    childTasks: [],
+    childTasks: ["0045", "0046"],
     isVisible: true,
     subTasks: [
       {
@@ -531,7 +530,7 @@ export const taskList = [
     taskDescription:
       "Enable Firebase Auth within the application using RN-Firebase.",
     assignedUsers: ["231232133435"],
-    childTasks: [],
+    childTasks: ["0034"],
     isVisible: true,
     subTasks: [
       {
@@ -548,6 +547,72 @@ export const taskList = [
     ],
   },
   {
+    taskID: "0022",
+    stage: "2",
+    started: true,
+    status: "started",
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 28,
+    taskName: "Update Spot Drawer",
+    taskDescription: "Fix the styling on the primary Spot bottom-drawer",
+    assignedUsers: ["231232133435"],
+    childTasks: ["0033"],
+    isVisible: true,
+    subTasks: [],
+  },
+  {
+    taskID: "0023",
+    stage: "2",
+    started: true,
+    status: "started",
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 50,
+    taskName: "Update All Spot Screen",
+    taskDescription: "Fix the styling on the All Spots Screen",
+    assignedUsers: ["231232133435"],
+    childTasks: [],
+    isVisible: true,
+    subTasks: [],
+  },
+  {
+    taskID: "0033",
+    stage: "3",
+    started: true,
+    status: "started",
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 50,
+    taskName: "Connect ToggleSpot function to Firebase",
+    taskDescription:
+      "Implement the function to correctly call the Toggle Spot endpoint.",
+    assignedUsers: ["231232133435"],
+    childTasks: [],
+    isVisible: true,
+    subTasks: [],
+  },
+  {
+    taskID: "0034",
+    stage: "3",
+    started: true,
+    status: "started",
+    startDate: "9/09/2024 - 2:00 pm",
+    completionDate: null,
+    completed: false,
+    percentComplete: 50,
+    taskName: "User data fetching",
+    taskDescription:
+      "Implement function to correctly fetch the users details from the user endpoint and store it.",
+    assignedUsers: ["231232133435"],
+    childTasks: [],
+    isVisible: true,
+    subTasks: [],
+  },
+  {
     taskID: "0029",
     stage: "2",
     started: true,
@@ -560,7 +625,7 @@ export const taskList = [
     taskDescription:
       "Design and implement a splash screen to enhance the user experience during app launch.",
     assignedUsers: ["231232133435", "849327232321"],
-    childTasks: [],
+    childTasks: ["0030"],
     isVisible: true,
     subTasks: [
       {
@@ -657,11 +722,11 @@ export const taskList = [
     completionDate: null,
     completed: false,
     percentComplete: 5,
-    taskName: "Fix Main Screen Layout",
+    taskName: "Fix Spot Screen Layout",
     taskDescription:
       "Refactor and fix issues with the layout of the main screen to enhance user experience.",
     assignedUsers: ["231232133435", "849327232321"],
-    childTasks: [],
+    childTasks: ["0022", "0023"],
     isVisible: true,
     subTasks: [
       {
@@ -740,7 +805,7 @@ export const taskList = [
     taskDescription:
       "Update push notification logic to handle more complex interactions like in-app and external notifications.",
     assignedUsers: ["231232133435", "849327232321"],
-    childTasks: ["0030", "0031"],
+    childTasks: ["0031", "0032"],
     isVisible: true,
     subTasks: [
       {

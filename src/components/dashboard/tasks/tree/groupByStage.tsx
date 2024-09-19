@@ -4,14 +4,10 @@ type groupTaskData = {
   label: string;
 };
 
-type NodeVisibility = {
-  visible: boolean;
-};
-// Define the type for a node
 type Node = {
   id: string;
   type: "group" | "custom";
-  data: (Task & NodeVisibility) | groupTaskData;
+  data: Task | groupTaskData;
   position: { x: number; y: number };
   style?: {
     width: number;
@@ -61,48 +57,38 @@ export const groupTasksByStage = (
       position: { x: stageIndex * 600, y: 0 },
       style: {
         width: 500,
-        height: 700,
+        height: 70,
         border: "1px solid gray",
         borderRadius: 8,
       },
     });
 
     stageTasks.forEach((task, taskIndex) => {
-      if (task.isVisible) {
-        // Only generate visible task nodes
-        const taskId = `${groupId}-${taskIndex + 1}`;
-        const taskNode: Node = {
-          id: taskId,
-          type: "custom",
-          data: { ...task, visible: true },
-          position: { x: 20, y: taskIndex * 250 + 20 },
-          parentId: groupId,
-          sourcePosition: "right",
-          extent: "parent",
-        };
-        nodes.push(taskNode);
+      const taskNode: Node = {
+        id: task.taskID,
+        type: "custom",
+        data: task,
+        position: { x: 20, y: taskIndex * 200 },
+        parentId: groupId,
+        sourcePosition: "right",
+        extent: "parent",
+      };
+      nodes.push(taskNode);
 
-        // Generate edges only if the task is visible
-        task.childTasks.forEach((childTaskId: string) => {
-          const childTask = tasks.find(
-            (t) => t.taskID === childTaskId && t.isVisible
-          );
-          if (childTask) {
-            const childStage = childTask.stage;
-            const childGroupId = `S-${childStage}`;
-            const childTaskIndex = groupedTasks[childStage]?.findIndex(
-              (t) => t.taskID === childTaskId
-            );
-            const childNodeId = `${childGroupId}-${childTaskIndex + 1}`;
-            edges.push({
-              id: `h-${taskId}-${childNodeId}`,
-              source: taskId,
-              target: childNodeId,
-              animated: true,
-            });
-          }
-        });
-      }
+      // Generate edges only if the task is visible
+      task.childTasks.forEach((childTaskId: string) => {
+        const childTask = tasks.find(
+          (t) => t.taskID === childTaskId && t.isVisible
+        );
+        if (childTask) {
+          edges.push({
+            id: `h-${task.taskID}-${childTask.taskID}`,
+            source: task.taskID,
+            target: childTask.taskID,
+            animated: true,
+          });
+        }
+      });
     });
   });
 

@@ -30,10 +30,10 @@ const statusColors: Record<Task["status"], string> = {
 };
 
 function CustomNode({ data }: any) {
-  const statusClass = statusColors[data.status as keyof typeof statusColors];
+  const statusClass = statusColors["started" as keyof typeof statusColors];
 
   return (
-    <div className="overflow-hidden flex flex-col rounded-lg bg-zinc-100   dark:bg-zinc-800 max-w-[300px] 2xl:max-w-[460px] max-h-[200px] shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
+    <div className="overflow-hidden flex flex-col rounded-lg bg-zinc-100   dark:bg-zinc-800 max-w-[300px] min-w-[300px] 2xl:max-w-[460px] 2xl:min-w-[460px]  max-h-[200px] shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
       <div className="p-3 2xl:p-5">
         <div className="flex items-start mb-2 w-full justify-between">
           <div

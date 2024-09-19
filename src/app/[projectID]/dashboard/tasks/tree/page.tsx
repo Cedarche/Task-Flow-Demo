@@ -1,3 +1,3 @@
-import TaskTree from "@/components/dashboard/tasks/tree/TaskTree";
+import DagreTreeChart from "@/components/dashboard/tasks/dagreTree/dagreTree";
 
-export default TaskTree;
+export default DagreTreeChart;
