@@ -1,7 +1,7 @@
 "use client"
 import { useSearchParams } from "next/navigation";
 import TaskGrid from "@/components/dashboard/tasks/grid/TaskGrid";
-import TreeChart from "@/components/dashboard/tasks/dagreTree/DagreTree"
+import TreeChart from "@/components/dashboard/tasks/tree/DagreTree"
 
 function Tasks() {
   const searchParams = useSearchParams();

@@ -1,4 +1,4 @@
 
-import TreeChart from "@/components/dashboard/tasks/dagreTree/DagreTree";
+import TreeChart from "@/components/dashboard/tasks/tree/DagreTree";
 
 export default TreeChart;
