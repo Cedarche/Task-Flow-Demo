@@ -1,17 +1,14 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { CircularProgressbar } from "react-circular-progressbar";
 
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
 import {
   RectangleStackIcon,
   ArrowTopRightOnSquareIcon,
   EyeIcon,
   EyeSlashIcon,
+  PlusCircleIcon,
+  MinusCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Task } from "@/stores/task-store";
@@ -20,10 +17,38 @@ import { teamList } from "@/lib/DEMODATA";
 import { statusColors } from "@/lib/constants";
 
 function CustomNode({ data }: any) {
+  const [expanded, setExpanded] = useState(true);
   const statusClass = statusColors["started" as keyof typeof statusColors];
 
   return (
-    <div onClick={data.openTask} className="overflow-hidden cursor-pointer flex flex-col rounded-lg bg-zinc-100   dark:bg-zinc-800 max-w-[300px] min-w-[300px] 2xl:max-w-[460px] 2xl:min-w-[460px]  max-h-[200px] shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
+    <div
+      onClick={data.openTask}
+      className=" relative  cursor-pointer flex flex-col rounded-lg bg-zinc-100   dark:bg-zinc-800 max-w-[300px] min-w-[300px] 2xl:max-w-[460px] 2xl:min-w-[460px]  max-h-[200px] shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70"
+    >
+      {data.childTasks.length > 0 &&
+        (expanded ? (
+          <div
+            className="absolute -right-2.5  rounded-full z-20 top-[45%] transition duration-300 ease-in-out transition:scale-110"
+            onClick={(event) => {
+              event.stopPropagation();
+              data.toggleVisibility();
+              setExpanded((prev) => !prev);
+            }}
+          >
+            <MinusCircleIcon className="size-4 2xl:size-5  cursor-pointer hover:text-rose-400 text-rose-400 bg-white dark:bg-gray-900 rounded-full  hover:scale-110" />
+          </div>
+        ) : (
+          <div
+            className="absolute -right-2.5  rounded-full z-20 top-[45%]"
+            onClick={(event) => {
+              event.stopPropagation();
+              data.toggleVisibility();
+              setExpanded((prev) => !prev);
+            }}
+          >
+            <PlusCircleIcon className="size-4 2xl:size-5  cursor-pointer hover:text-green-400 text-green-400 bg-white dark:bg-gray-900 rounded-full  hover:scale-110" />
+          </div>
+        ))}
       <div className="p-3 2xl:p-5">
         <div className="flex items-start mb-2 w-full justify-between">
           <div
@@ -36,12 +61,10 @@ function CustomNode({ data }: any) {
           </div>
 
           {data.childTasks.length > 0 && (
-            <EyeSlashIcon
-              className="size-4 2xl:size-5  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400"
-              onClick={data.toggleVisibility}
-            />
+            <XMarkIcon className="size-4 2xl:size-5  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400" />
           )}
         </div>
+
         <div className="flex flex-row">
           <div className="flex-grow flex flex-col">
             <dt className="truncate text-sm 2xl:text-base font-bold text-gray-700 dark:text-gray-200">

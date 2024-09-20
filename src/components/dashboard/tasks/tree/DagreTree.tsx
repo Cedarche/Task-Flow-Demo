@@ -114,7 +114,7 @@ const TreeChart = () => {
 
   const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   const edgeOptions = {
     style: {
@@ -205,10 +205,11 @@ const TreeChart = () => {
 
   const nodeClick = (node: any) => {
     let currentNodeID = node.id;
-    stack.push(node);
+    let stack: any[] = [node];
     let outgoers: any[] = [];
     let connectedEdges: any[] = [];
 
+    // Traverse through outgoers (child nodes)
     while (stack.length > 0) {
       let lastNode = stack.pop();
       let childNodes = getOutgoers(lastNode, nodes, edges);
@@ -216,28 +217,36 @@ const TreeChart = () => {
         getConnectedEdges([lastNode], edges),
         currentNodeID
       );
+
       childNodes.forEach((childNode) => stack.push(childNode));
       connectedEdges.push(...childEdges);
       outgoers.push(...childNodes);
     }
 
-    let childNodeID = outgoers.map((node: any) => node.id);
-    let childEdgeID = connectedEdges.map((edge: any) => edge.id);
+    // Collect child nodes and edges IDs
+    const childNodeID = outgoers.map((node: any) => node.id);
+    const childEdgeID = connectedEdges.map((edge: any) => edge.id);
 
-    // Filter nodes and edges to hide those that are not visible
-    const updatedNodes = nodes.map((node) => ({
-      ...node,
-      hidden: childNodeID.includes(node.id) ? !hidden : node.hidden,
-    }));
-    const updatedEdges = edges.map((edge) => ({
-      ...edge,
-      hidden: childEdgeID.includes(edge.id) ? !hidden : edge.hidden,
-    }));
 
-    setNodes(updatedNodes);
-    setEdges(updatedEdges);
+
+    // Update visibility for nodes and edges
+    setNodes((prevNodes) =>
+      prevNodes.map((node) => ({
+        ...node,
+        hidden: childNodeID.includes(node.id) ? !hidden : node.hidden,
+      }))
+    );
+
+    setEdges((prevEdges) =>
+      prevEdges.map((edge) => ({
+        ...edge,
+        hidden: childEdgeID.includes(edge.id) ? !hidden : edge.hidden,
+      }))
+    );
+
+    // Set `hidden` state and ensure the positions are recalculated
     setHidden(!hidden);
-    recalculateNodePositions();
+    setTimeout(recalculateNodePositions, 0); // Delaying recalculation
   };
 
   if (!initialNodes.length) {
