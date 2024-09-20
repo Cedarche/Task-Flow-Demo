@@ -9,7 +9,7 @@ import {
 } from "@headlessui/react";
 import {
   RectangleStackIcon,
-  ChevronDoubleDownIcon,
+  ArrowTopRightOnSquareIcon,
   EyeIcon,
   EyeSlashIcon,
   XMarkIcon,
@@ -17,23 +17,13 @@ import {
 import { Task } from "@/stores/task-store";
 import SubTask from "../grid/SubTask";
 import { teamList } from "@/lib/DEMODATA";
-
-const statusColors: Record<Task["status"], string> = {
-  notStarted:
-    "bg-gray-50 text-gray-600 ring-gray-500/10 dark:text-gray-400 dark:ring-gray-400/20 dark:bg-gray-400/10",
-  started:
-    "bg-blue-50 text-blue-700 ring-blue-700/10 dark:text-blue-400 dark:ring-blue-400/30 dark:bg-blue-400/10",
-  issues:
-    "bg-red-50 text-red-700 ring-red-600/10 dark:text-red-400 dark:ring-red-400/20 dark:bg-red-400/10",
-  complete:
-    "bg-green-50 text-green-700 ring-green-600/20 dark:text-green-400 dark:ring-green-500/20 dark:bg-green-500/10",
-};
+import { statusColors } from "@/lib/constants";
 
 function CustomNode({ data }: any) {
   const statusClass = statusColors["started" as keyof typeof statusColors];
 
   return (
-    <div className="overflow-hidden cursor-pointer flex flex-col rounded-lg bg-zinc-100   dark:bg-zinc-800 max-w-[300px] min-w-[300px] 2xl:max-w-[460px] 2xl:min-w-[460px]  max-h-[200px] shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
+    <div onClick={data.openTask} className="overflow-hidden cursor-pointer flex flex-col rounded-lg bg-zinc-100   dark:bg-zinc-800 max-w-[300px] min-w-[300px] 2xl:max-w-[460px] 2xl:min-w-[460px]  max-h-[200px] shadow ring-1 ring-zinc-200 dark:ring-zinc-500/30 hover:ring-green-400/70">
       <div className="p-3 2xl:p-5">
         <div className="flex items-start mb-2 w-full justify-between">
           <div
@@ -44,6 +34,7 @@ function CustomNode({ data }: any) {
               {data.taskID}
             </div>
           </div>
+
           {data.childTasks.length > 0 && (
             <EyeSlashIcon
               className="size-4 2xl:size-5  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400"

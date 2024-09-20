@@ -1,3 +1,4 @@
+"use client"
 import {
   PlusIcon,
   AdjustmentsHorizontalIcon,
@@ -76,27 +77,23 @@ function StageDropdown() {
   );
 }
 
+// Inside ViewDropdown component
 function ViewDropdown() {
   const router = useRouter();
   const pathname = usePathname();
   const projectID = pathname.split("/")[1];
-  const currentValue = pathname.split("/");
+  const searchParams = new URLSearchParams(window.location.search);
+  const currentView = searchParams.get("view") || "Tree";
 
-  // Handler to handle change in the dropdown value
   const handleViewChange = (value: string) => {
-    if (value === "Grid") {
-      router.push(`/${projectID}/dashboard/tasks`);
-    } else if (value === "Tree") {
-      router.push(`/${projectID}/dashboard/tasks/tree`);
-    }
+    const params = new URLSearchParams();
+    params.set("view", value); // set the view query param
+    router.push(`/${projectID}/dashboard/tasks?${params.toString()}`);
   };
 
   return (
     <Field>
-      <Listbox
-        defaultValue={currentValue.includes("tree") ? "Tree" : "Grid"}
-        onChange={handleViewChange}
-      >
+      <Listbox defaultValue={currentView} onChange={handleViewChange}>
         <ListboxOption value="Grid">
           <Squares2X2Icon />
           <ListboxLabel className="hidden sm:block">Grid</ListboxLabel>

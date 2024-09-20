@@ -13,6 +13,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import dagre from "@dagrejs/dagre";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 import GroupNode from "./GroupNode";
 import CustomNode from "./CustomNode";
 import { useTaskStore } from "@/providers/task-store-provider";
@@ -28,9 +29,16 @@ const nodeTypes = {
 const TreeChart = () => {
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
+  const router = useRouter();
   const tasks = useTaskStore((state) => state.tasks);
 
   const initialNodes = generateNodesFromTasks(tasks);
+
+  const handleTaskClick = (taskID: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("taskID", taskID);
+    router.push(`?${params.toString()}`);
+  };
 
   // Dynamically create edges based on childTasks
   const initialEdges = initialNodes
@@ -245,6 +253,7 @@ const TreeChart = () => {
           data: {
             ...node.data,
             toggleVisibility: () => nodeClick(node),
+            openTask: () => handleTaskClick(node.id),
           },
         }))}
         edges={edges}

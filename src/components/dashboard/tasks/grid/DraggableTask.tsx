@@ -19,6 +19,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { teamList } from "@/lib/DEMODATA";
 import { Task } from "@/stores/task-store";
 import SubTask from "./SubTask";
+import { statusColors } from "@/lib/constants";
 
 interface DraggableItemProps {
   task: Task;
@@ -26,18 +27,8 @@ interface DraggableItemProps {
   state: any[];
   setState: React.Dispatch<React.SetStateAction<any[]>>;
   ind: number;
+  handleTaskClick: (taskID: string) => void; // Updated type
 }
-
-const statusColors: Record<Task["status"], string> = {
-  notStarted:
-    "bg-gray-50 text-gray-600 ring-gray-500/10 dark:text-gray-400 dark:ring-gray-400/20 dark:bg-gray-400/10",
-  started:
-    "bg-blue-50 text-blue-700 ring-blue-700/10 dark:text-blue-400 dark:ring-blue-400/30 dark:bg-blue-400/10",
-  issues:
-    "bg-red-50 text-red-700 ring-red-600/10 dark:text-red-400 dark:ring-red-400/20 dark:bg-red-400/10",
-  complete:
-    "bg-green-50 text-green-700 ring-green-600/20 dark:text-green-400 dark:ring-green-500/20 dark:bg-green-500/10",
-};
 
 const DraggableItem: React.FC<DraggableItemProps> = ({
   task,
@@ -45,6 +36,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   state,
   setState,
   ind,
+  handleTaskClick,
 }) => {
   const statusClass = statusColors[task.status as keyof typeof statusColors];
 
@@ -57,7 +49,10 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
           {...provided.dragHandleProps}
           className="overflow-hidden flex flex-col rounded-lg bg-zinc-100 mb-2 2xl:mb-4 dark:bg-zinc-800  shadow hover:ring-1 hover:ring-green-400/70"
         >
-          <div className="p-3 2xl:p-5">
+          <div
+            className="p-3 2xl:p-5"
+            onClick={() => handleTaskClick(task.taskID)}
+          >
             <div className="flex items-start mb-2 w-full justify-between">
               <div
                 className={`inline-flex items-center rounded-md px-1.5 py-0.5 2xl:px-2 2xl:py-1 text-xs font-medium ring-1 ring-inset ${statusClass}`}

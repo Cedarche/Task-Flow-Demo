@@ -5,15 +5,11 @@ import {
   Droppable,
   Draggable,
   DropResult,
-  DraggableProvided,
-  DraggableStateSnapshot,
+
 } from "@hello-pangea/dnd";
+import { useRouter } from "next/navigation";
 import { Subheading } from "@/components/catalyst/heading";
-import { Button } from "@/components/catalyst/button";
 import { reorder, move, groupTasksByStatus } from "./GridFunctions";
-import { PlusIcon } from "@heroicons/react/16/solid";
-import TaskDrawer from "../../navigation/TaskDrawer";
-import { taskList } from "@/lib/DEMODATA";
 import DraggableItem from "./DraggableTask"; // Import the new DraggableItem component
 import { useTaskStore } from "@/providers/task-store-provider";
 
@@ -47,12 +43,19 @@ function TaskGrid() {
   const tasks = useTaskStore((state) => state.tasks);
   const updateTask = useTaskStore((state) => state.updateTask);
   const groupedTasks = groupTasksByStatus(tasks);
+  const router = useRouter();
 
   const [state, setState] = useState(Object.values(groupedTasks));
   // Sync the local state with the Zustand store
   useEffect(() => {
     setState(Object.values(groupTasksByStatus(tasks)));
   }, [tasks]);
+
+  const handleTaskClick = (taskID: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("taskID", taskID);
+    router.push(`?${params.toString()}`);
+  };
 
   function onDragEnd(result: DropResult) {
     const { source, destination } = result;
@@ -135,6 +138,7 @@ function TaskGrid() {
                               state={state}
                               setState={setState}
                               ind={ind}
+                              handleTaskClick={handleTaskClick}
                             />
                           ))}
                           {provided.placeholder}
