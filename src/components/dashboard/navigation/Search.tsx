@@ -1,17 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 "use client";
 
 import {
@@ -23,6 +9,8 @@ import {
   DialogPanel,
   DialogBackdrop,
 } from "@headlessui/react";
+
+import { usePathname, useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import {
   FolderIcon,
@@ -46,19 +34,27 @@ const quickActions = [
 ];
 
 export default function SearchPalette({ open, setOpen }: any) {
+  const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
   const tasks = useTaskStore((state) => state.tasks);
   const teamMembers = useTeamStore((state) => state.teamMembers);
+  const router = useRouter();
+  const pathname = usePathname();
+  const projectID = pathname.split("/")[1];
 
   const statusClass = statusColors["started" as keyof typeof statusColors];
 
-  const recent = tasks.slice(0,3);
+  const recent = tasks.slice(0, 3);
 
   const filteredProjects =
     query === ""
       ? []
       : tasks.filter((task) => {
-          return task.taskName.toLowerCase().includes(query.toLowerCase());
+          const lowerCaseQuery = query.toLowerCase();
+          return (
+            task.taskName.toLowerCase().includes(lowerCaseQuery) ||
+            task.taskID.toLowerCase().includes(lowerCaseQuery)
+          );
         });
 
   return (
@@ -83,7 +79,13 @@ export default function SearchPalette({ open, setOpen }: any) {
           <Combobox
             onChange={(item: any) => {
               if (item) {
-                window.location = item.url;
+                setOpen(false);
+                setQuery("");
+                const params = new URLSearchParams(window.location.search);
+                params.set("taskID", item.taskID);
+                router.push(
+                  `/${projectID}/dashboard/tasks?${params.toString()}`
+                );
               }
             }}
           >
@@ -176,7 +178,7 @@ export default function SearchPalette({ open, setOpen }: any) {
                   aria-hidden="true"
                 />
                 <p className="mt-4 text-sm text-gray-900 dark:text-gray-200">
-                  We couldn't find any projects or team members with that term.
+                  We couldn't find any tasks or team members with that term.
                   Please try again.
                 </p>
               </div>
