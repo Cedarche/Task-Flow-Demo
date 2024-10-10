@@ -32,7 +32,7 @@ function TasksBoard({ children }: any) {
 
       setOpenTask(!!taskID);
     }
-  }, [taskID]);
+  }, [taskID, getTaskByID]);
 
   const handleCloseTaskDrawer = () => {
     setOpenTask(false);

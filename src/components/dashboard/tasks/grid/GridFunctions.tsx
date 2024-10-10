@@ -1,6 +1,4 @@
-import { DraggableProvided } from "@hello-pangea/dnd";
-
-import { Task } from "@/stores/task-store";
+import { Task } from "@/lib/types";
 
 // Function to reorder items within the same list
 export const reorder = (

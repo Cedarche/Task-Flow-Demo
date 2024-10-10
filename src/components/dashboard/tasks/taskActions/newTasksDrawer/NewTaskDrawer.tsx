@@ -1,5 +1,5 @@
 "use client";
-
+import { useState, useEffect } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon, RectangleGroupIcon } from "@heroicons/react/24/outline";
 import {
@@ -24,7 +24,7 @@ import { Task, TeamMember } from "@/lib/types";
 import { Radio, RadioField, RadioGroup } from "@/components/catalyst/radio";
 import ExistingTaskDropdown from "./ExistingTasksDropdown";
 import TeamDropdown from "./TeamDropdown";
-import { useState } from "react";
+import clsx from "clsx";
 
 interface DrawerProps {
   open: boolean;
@@ -48,6 +48,17 @@ export default function NewTaskDrawer({
   const [selectedTeam, setSelectedTeam] = useState<TeamMember[]>([]);
   const [taskName, setTaskName] = useState<string>("");
   const [taskDescription, setTaskDescription] = useState<string>("");
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    const isTaskNameFilled = taskName.trim().length > 0;
+    const isTaskDescriptionFilled = taskDescription.trim().length > 0;
+    const isTeamSelected = selectedTeam.length > 0; // or however you determine if a team member is selected
+
+    setDisabled(
+      !(isTaskNameFilled && isTaskDescriptionFilled && isTeamSelected)
+    );
+  }, [taskName, taskDescription, selectedTeam]);
 
   const handleSubmit = () => {
     let stageNumber = stage.slice(-1);
@@ -171,7 +182,7 @@ export default function NewTaskDrawer({
                                 <option>Stage 2</option>
                                 <option>Stage 3</option>
                                 <option>Stage 4</option>
-                                <option>Stage 5</option>
+
                               </Select>
                               <Description>
                                 Select which stage of the project this task
@@ -270,7 +281,13 @@ export default function NewTaskDrawer({
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    className="relative inline-flex justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-2"
+                    disabled={disabled}
+                    className={clsx([
+                      "relative inline-flex justify-center rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-2",
+                      disabled
+                        ? "cursor-not-allowed bg-gray-600 dark:bg-gray-500 hover:bg-gray-400 dark:hover:bg-gray-300"
+                        : " cursor-pointer bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-500 dark:hover:bg-indigo-400",
+                    ])}
                   >
                     Save
                   </button>
