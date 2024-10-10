@@ -32,7 +32,7 @@ export function LogoCloud({
       )}
     >
       {companies.map((company, i) => (
-        <Logo company={company} />
+        <Logo company={company} key={company.name} />
       ))}
     </div>
   );
