@@ -5,4 +5,4 @@ Next.JS.
 
 Visit the demo here: https://next-js-demo-flame.vercel.app/
 
-Copyright Tom Carruthers - 09/09/2024. All rights are reserved.
+Copyright Tom Carruthers - 10/10/2024. All rights are reserved.
