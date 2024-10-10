@@ -1,6 +1,5 @@
-'use client'
+
 import {
-  RectangleGroupIcon,
   ArrowTopRightOnSquareIcon,
   RectangleStackIcon
 } from "@heroicons/react/24/outline";
@@ -37,7 +36,7 @@ export function TasksOverview({ taskList, teamList }: any) {
               id="Subtask summary"
               className="flex-none  max-w-[50px] flex items-center justify-center ml-4"
             >
-              <CircularProgressbar value={task.percentComplete} text={`${task.percentComplete}%`} />
+              <CircularProgressbar value={task.percentComplete ? task?.percentComplete : 5} text={`${task?.percentComplete}%`} />
             </div>
           </div>
           <div className="flex w-full items-center justify-between">

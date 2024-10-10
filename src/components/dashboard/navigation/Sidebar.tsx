@@ -54,11 +54,17 @@ import {
 } from "@heroicons/react/20/solid";
 import ThemeToggle from "../../themeToggle";
 import SearchPalette from "./Search";
+import { useTaskStore } from "@/providers/task-store-provider";
+import SidebarTasksAccordian from "./SidebarTasksAccordian";
 
 export default function LayoutSidebar({ children }: any) {
   const pathname = usePathname();
   const projectID = pathname.split("/")[1];
+  const route = pathname.split("/").slice(-1)[0] 
+
   const [open, setOpen] = useState(false);
+  const tasks = useTaskStore((state) => state.tasks);
+  // console.log('Tasks: ', tasks)
 
   return (
     <>
@@ -155,29 +161,27 @@ export default function LayoutSidebar({ children }: any) {
             </SidebarHeader>
             <SidebarBody>
               <SidebarSection>
-                <SidebarItem href={`/${projectID}/dashboard`}>
+                <SidebarItem current={route === 'dashboard'} href={`/${projectID}/dashboard`}>
                   <HomeIcon />
                   <SidebarLabel>Overview</SidebarLabel>
                 </SidebarItem>
-                <SidebarItem href={`/${projectID}/dashboard/tasks`}>
+                <SidebarItem current={route === 'tasks'}  href={`/${projectID}/dashboard/tasks`}>
                   <Square2StackIcon />
                   <SidebarLabel>Tasks</SidebarLabel>
                 </SidebarItem>
-                <SidebarItem href={`/${projectID}/dashboard/team`}>
+                <SidebarItem current={route === 'team'} href={`/${projectID}/dashboard/team`}>
                   <UserGroupIcon />
                   <SidebarLabel>Team</SidebarLabel>
                 </SidebarItem>
-                <SidebarItem href={`/${projectID}/dashboard/settings`}>
+                <SidebarItem current={route === 'settings'} href={`/${projectID}/dashboard/settings`}>
                   <Cog6ToothIcon />
                   <SidebarLabel>Settings</SidebarLabel>
                 </SidebarItem>
-                {/* <SidebarItem>
-                  <ChatBubbleLeftRightIcon />
-                  <SidebarLabel>Discussion</SidebarLabel>
-                </SidebarItem> */}
               </SidebarSection>
               <SidebarSection className="max-2xl:hidden">
-                <SidebarHeading>Latest Task Changes</SidebarHeading>
+              <SidebarHeading>All Stages</SidebarHeading>
+                <SidebarTasksAccordian tasks={tasks}/>
+                {/* 
                 <SidebarItem href={`/${projectID}/dashboard/tasks?taskID=0045`}>
                   <RectangleStackIcon className="h-6 w-6  text-blue-400" />
                   <span className="font-mono text-sm leading-1">0045</span>{" "}
@@ -192,7 +196,7 @@ export default function LayoutSidebar({ children }: any) {
                   <RectangleStackIcon className="h-6 w-6  text-blue-400" />
                   <span className="font-mono text-sm leading-1">0043</span>{" "}
                   Started
-                </SidebarItem>
+                </SidebarItem> */}
               
               </SidebarSection>
               <SidebarSpacer />
@@ -219,10 +223,10 @@ export default function LayoutSidebar({ children }: any) {
                 <DropdownButton as={SidebarItem}>
                   <span className="flex min-w-0 items-center gap-3">
                     <Avatar
-                      src="/Headshot.jpg"
+                      src="/Headshot_small.jpg"
                       className="size-10 object-contain"
                       square
-                      alt=""
+                      alt="Tom Carruthers Headshot"
                     />
                     <span className="min-w-0">
                       <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">

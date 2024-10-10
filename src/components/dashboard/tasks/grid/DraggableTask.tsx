@@ -17,7 +17,7 @@ import {
 } from "@headlessui/react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { teamList } from "@/lib/DEMODATA";
-import { Task } from "@/stores/task-store";
+import { Task } from "@/lib/types";
 import SubTask from "./SubTask";
 import { statusColors } from "@/lib/constants";
 

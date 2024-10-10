@@ -1,3 +1,4 @@
+'use client'
 import { Heading } from "@/components/catalyst/heading";
 import ActivityTable from "./ActivityTable";
 import { ProjectDropdown } from "./ProjectDropdown";

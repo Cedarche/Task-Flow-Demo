@@ -5,43 +5,24 @@ import { Heading } from "@/components/catalyst/heading";
 import { TaskBoardDropdown } from "./TaskBoardDropdown";
 import { TaskBanner } from "./TaskBanner";
 import { useTaskStore } from "@/providers/task-store-provider";
+import { useTeamStore } from "@/providers/team-store-provider";
 
-import NewTaskDrawer from "../navigation/NewTaskDrawer";
-import TaskDrawer from "../navigation/TaskDrawer";
+import NewTaskDrawer from "./taskActions/newTasksDrawer/NewTaskDrawer";
+import TaskDrawer from "./taskActions/taskDrawer/TaskDrawer";
 
 function TasksBoard({ children }: any) {
   const searchParams = useSearchParams();
   const taskID = searchParams.get("taskID");
   const [openTask, setOpenTask] = useState(!!taskID);
-  const [addTask, setAddTask] = useState(false);
+  const [openNewTask, setOpenNewTask] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const [taskData, setTaskData] = useState<any>(null);
   const getTaskByID = useTaskStore((state) => state.getTaskByID);
-
-  // useEffect(() => {
-  //   const fetchTask = async () => {
-  //     if (taskID) {
-  //       try {
-  //         const response = await fetch(`/api/tasks/${taskID}`, {
-  //           method: 'GET', // Ensure you're using GET method
-  //         });
-
-  //         if (!response.ok) {
-  //           throw new Error('Network response was not ok');
-  //         }
-
-  //         const data = await response.json();
-
-  //         setTaskData(data);
-  //       } catch (error) {
-  //         console.error('Error fetching task:', error);
-  //       }
-  //     }
-  //   };
-
-  //   fetchTask();
-  // }, [taskID]);
+  const addTask = useTaskStore((state) => state.addTask);
+  const updateTask = useTaskStore((state) => state.updateTask);
+  const tasks = useTaskStore((state) => state.tasks);
+  const teamMembers = useTeamStore((state) => state.teamMembers);
 
   useEffect(() => {
     if (taskID) {
@@ -59,12 +40,19 @@ function TasksBoard({ children }: any) {
       const params = new URLSearchParams(searchParams.toString());
       params.delete("taskID");
       router.replace(`${pathname}?${params.toString()}`);
-    }, 500); // Adjust the delay to match your drawer's animation duration
+    }, 500);
   };
 
   return (
     <>
-      <NewTaskDrawer open={addTask} setOpen={setAddTask} />
+      <NewTaskDrawer
+        open={openNewTask}
+        setOpen={setOpenNewTask}
+        tasks={tasks}
+        updateTask={updateTask}
+        addTask={addTask}
+        teamMembers={teamMembers}
+      />
       <TaskDrawer
         open={openTask}
         setOpen={setOpenTask}
@@ -83,7 +71,7 @@ function TasksBoard({ children }: any) {
             </Heading>
             <TaskBoardDropdown />
           </div>
-          <TaskBanner setAddTask={setAddTask} />
+          <TaskBanner setAddTask={setOpenNewTask} />
         </div>
         <div className="flex-1">{children}</div>
       </div>

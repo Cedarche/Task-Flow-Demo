@@ -1,5 +1,6 @@
 import { Dialog, DialogPanel } from "@headlessui/react";
-import { Task } from "@/stores/task-store";
+
+import { Task } from "@/lib/types";
 import { statusColors } from "@/lib/constants";
 import {
   RectangleStackIcon,
@@ -11,7 +12,7 @@ import { Heading, Subheading } from "@/components/catalyst/heading";
 import { Text } from "@/components/catalyst/text";
 import { teamList } from "@/lib/DEMODATA";
 import { CircularProgressbar } from "react-circular-progressbar";
-import SubTask from "../tasks/grid/SubTask";
+import SubTask from "../../grid/SubTask";
 import { Button } from "@/components/catalyst/button";
 import { PlusIcon } from "@heroicons/react/16/solid";
 
@@ -67,7 +68,7 @@ export default function TaskDrawer({
                           </div>
                           <Text>{task.status}</Text>
                         </div>
-                        <XMarkIcon className="size-4 2xl:size-5  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400" />
+                        <XMarkIcon onClick={() => setOpen(false)} className="size-4 2xl:size-5  cursor-pointer hover:text-rose-400 text-gray-600 dark:text-gray-400" />
                       </div>
                       {/* Task Name */}
                       <div className="w-full py-4 px-3 my-1  border border-gray-300 dark:border-gray-200/20 rounded-md flex flex-col ">

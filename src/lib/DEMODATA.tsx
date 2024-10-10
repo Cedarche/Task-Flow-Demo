@@ -152,7 +152,7 @@ export const teamList = [
     email: "t.carruthers@snappark.co",
     task: "0044",
     subTask: "01",
-    imageUrl: "/Headshot.jpg",
+    imageUrl: "/Headshot_small.jpg",
   },
   {
     name: "Michael Foster",

@@ -17,9 +17,10 @@ import { useRouter } from "next/navigation";
 import GroupNode from "./GroupNode";
 import CustomNode from "./CustomNode";
 import { useTaskStore } from "@/providers/task-store-provider";
+
+import { Task } from "@/lib/types";
 import useWindowDimensions from "@/components/hooks/useWindowDimensions";
 import { generateNodesFromTasks } from "./GenerateNodes";
-import { Task } from "@/stores/task-store";
 
 const nodeTypes = {
   custom: CustomNode,
@@ -34,11 +35,27 @@ const TreeChart = () => {
 
   const initialNodes = generateNodesFromTasks(tasks);
 
-  const handleTaskClick = (taskID: string) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set("taskID", taskID);
-    router.push(`?${params.toString()}`);
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+  const nodeWidth = width <= 1536 ? 300 : 480;
+  const nodeHeight = width <= 1536 ? 140 : 210;
+
+  // Define stage offsets for horizontal positioning
+  const stageOffsets: Record<string, number> = {
+    "1": width <= 1536 ? 0 : 0,
+    "2": width <= 1536 ? 50 : 100,
+    "3": width <= 1536 ? 100 : 200,
+    "4": width <= 1536 ? 150 : 300,
   };
+
+  const edgeOptions = {
+    style: {
+      stroke: theme === "dark" ? "#d5d5d5" : "#8f8f8f",
+    },
+  };
+
+  const colorMode = theme === "dark" ? "dark" : "light";
 
   // Dynamically create edges based on childTasks
   const initialEdges = initialNodes
@@ -53,20 +70,6 @@ const TreeChart = () => {
       return [];
     })
     .filter((edge) => edge);
-
-  const dagreGraph = new dagre.graphlib.Graph();
-  dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-  const nodeWidth = width <= 1536 ? 300 : 480;
-  const nodeHeight = width <= 1536 ? 140 : 210;
-
-  // Define stage offsets for horizontal positioning
-  const stageOffsets: Record<string, number> = {
-    "1": width <= 1536 ? 0 : 0,
-    "2": width <= 1536 ? 50 : 100,
-    "3": width <= 1536 ? 100 : 200,
-    "4": width <= 1536 ? 150 : 300,
-  };
 
   const getLayoutedElements = (nodes: any, edges: any, direction = "LR") => {
     const isHorizontal = direction === "LR";
@@ -115,14 +118,6 @@ const TreeChart = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
   const [hidden, setHidden] = useState(false);
-
-  const edgeOptions = {
-    style: {
-      stroke: theme === "dark" ? "#d5d5d5" : "#8f8f8f",
-    },
-  };
-
-  const colorMode = theme === "dark" ? "dark" : "light";
 
   const recalculateNodePositions = () => {
     let hasChanges = false;
@@ -191,8 +186,39 @@ const TreeChart = () => {
   };
 
   useEffect(() => {
+    // Re-run layout generation whenever tasks or dimensions change
+    const updatedNodes = generateNodesFromTasks(tasks);
+
+    const updatedEdges = updatedNodes.flatMap((node) => {
+      if (node.type !== "group" && "childTasks" in node.data) {
+        return node.data.childTasks.map((childId: any) => ({
+          id: `${node.id}->${childId}`,
+          source: node.id,
+          target: childId,
+        }));
+      }
+      return [];
+    });
+
+    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+      updatedNodes,
+      updatedEdges
+    );
+
+    setNodes(layoutedNodes);
+    setEdges(layoutedEdges);
     recalculateNodePositions();
-  }, [nodes, width]);
+  }, [tasks, width]);
+
+  useEffect(() => {
+    recalculateNodePositions();
+  }, [nodes, width, tasks]);
+
+  const handleTaskClick = (taskID: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("taskID", taskID);
+    router.push(`?${params.toString()}`);
+  };
 
   const checkTarget = (edge: any, id: any) => {
     let edges = edge.filter((ed: any) => {
@@ -200,8 +226,6 @@ const TreeChart = () => {
     });
     return edges;
   };
-
-  let stack = [];
 
   const nodeClick = (node: any) => {
     let currentNodeID = node.id;
@@ -226,8 +250,6 @@ const TreeChart = () => {
     // Collect child nodes and edges IDs
     const childNodeID = outgoers.map((node: any) => node.id);
     const childEdgeID = connectedEdges.map((edge: any) => edge.id);
-
-
 
     // Update visibility for nodes and edges
     setNodes((prevNodes) =>

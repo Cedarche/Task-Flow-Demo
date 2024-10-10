@@ -11,10 +11,13 @@ import {
   MinusCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Task } from "@/stores/task-store";
-import SubTask from "../grid/SubTask";
 import { teamList } from "@/lib/DEMODATA";
+import { Task } from "@/lib/types";
 import { statusColors } from "@/lib/constants";
+
+interface nodeProps {
+  data: Task;
+}
 
 function CustomNode({ data }: any) {
   const [expanded, setExpanded] = useState(true);

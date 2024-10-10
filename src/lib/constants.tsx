@@ -1,4 +1,5 @@
-import { Task } from "@/stores/task-store";
+
+import { Task } from "./types";
 
 export const statusColors: Record<Task["status"], string> = {
   notStarted:
@@ -10,3 +11,10 @@ export const statusColors: Record<Task["status"], string> = {
   complete:
     "bg-green-50 text-green-700 ring-green-600/20 dark:text-green-400 dark:ring-green-500/20 dark:bg-green-500/10",
 };
+
+
+export const gradientColors = {
+  from: '#d6fffe',
+  via: '#9da0ff',
+  to: '#8c00ff'
+}

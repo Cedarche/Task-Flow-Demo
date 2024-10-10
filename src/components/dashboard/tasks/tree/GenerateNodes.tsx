@@ -1,4 +1,4 @@
-import { Task } from "@/stores/task-store";
+import { Task } from "@/lib/types";
 
 const position = { x: 0, y: 0 };
 const groupNodeWidth = 1000;
@@ -62,6 +62,7 @@ export const generateNodesFromTasks = (tasks: Task[]) => {
     data: task,
     type: "custom",
     position,
+    hidden: false,
   }));
 
   // Combine group nodes and task nodes
