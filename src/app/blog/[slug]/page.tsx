@@ -59,7 +59,7 @@ export default async function BlogPost({
             )}
             {Array.isArray(post.categories) && (
               <div className="flex flex-wrap gap-2">
-                {post.categories.map((category) => (
+                {post.categories.map((category: any) => (
                   <Link
                     key={category.slug}
                     href={`/blog?category=${category.slug}`}

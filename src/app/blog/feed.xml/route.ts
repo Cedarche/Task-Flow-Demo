@@ -1,5 +1,5 @@
-import { image } from '@/sanity/image'
-import { getPostsForFeed } from '@/sanity/queries'
+import { image } from '@/sanity/lib/image'
+import { getPostsForFeed } from '@/sanity/lib/queries'
 import { Feed } from 'feed'
 import assert from 'node:assert'
 
@@ -26,7 +26,7 @@ export async function GET(req: Request) {
 
   let posts = await getPostsForFeed()
 
-  posts.forEach((post) => {
+  posts.forEach((post: any) => {
     try {
       assert(typeof post.title === 'string')
       assert(typeof post.slug === 'string')
