@@ -1,8 +1,10 @@
 # Next.JS Dashboard Demo
 
 A demo Dashboard for a project/task management app <br /> built in
-Next.JS. 
+Next.JS, Typescript, TailwindCSS, and PostgreSQL. 
 
-Visit the demo here: https://next-js-demo-flame.vercel.app/
+Visit the demo landing page here: https://next-js-demo-flame.vercel.app/
 
-Copyright Tom Carruthers - 10/10/2024. All rights are reserved.
+Or the demo dashboard here: https://next-js-demo-flame.vercel.app/e1/dashboard/ 
+
+Copyright Tom Carruthers - 08/04/2025. All rights are reserved.
